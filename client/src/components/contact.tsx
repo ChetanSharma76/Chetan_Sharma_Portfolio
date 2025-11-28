@@ -4,8 +4,70 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+
+type ContactFormData = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
 
 export function Contact() {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const contactMutation = useMutation({
+    mutationFn: async (data: ContactFormData) => {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send message");
+      }
+      
+      return result;
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Message Sent!",
+        description: data.message,
+      });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    contactMutation.mutate(formData);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
   return (
     <section id="contact" className="py-24 relative">
       <div className="container mx-auto px-6">
@@ -61,27 +123,61 @@ export function Contact() {
           >
             <Card className="bg-card/50 border-border backdrop-blur-md">
               <CardContent className="p-8">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">Name</label>
-                      <Input placeholder="John Doe" className="bg-background/50 border-border focus:border-primary" />
+                      <Input 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="John Doe" 
+                        className="bg-background/50 border-border focus:border-primary"
+                        required 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">Email</label>
-                      <Input placeholder="john@example.com" type="email" className="bg-background/50 border-border focus:border-primary" />
+                      <Input 
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="john@example.com" 
+                        className="bg-background/50 border-border focus:border-primary"
+                        required 
+                      />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">Subject</label>
-                    <Input placeholder="Project collaboration" className="bg-background/50 border-border focus:border-primary" />
+                    <Input 
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder="Project collaboration" 
+                      className="bg-background/50 border-border focus:border-primary"
+                      required 
+                    />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">Message</label>
-                    <Textarea placeholder="Tell me about your project..." className="min-h-[150px] bg-background/50 border-border focus:border-primary" />
+                    <Textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell me about your project..." 
+                      className="min-h-[150px] bg-background/50 border-border focus:border-primary"
+                      required 
+                    />
                   </div>
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 text-lg" size="lg">
-                    Send Message
+                  <Button 
+                    type="submit"
+                    disabled={contactMutation.isPending}
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 text-lg" 
+                    size="lg"
+                  >
+                    {contactMutation.isPending ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </CardContent>
