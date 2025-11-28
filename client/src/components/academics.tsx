@@ -10,7 +10,6 @@ interface AcademicItem {
   score: string;
   details: string;
   subjects: string[];
-  hoverColor: string;
 }
 
 export function Academics() {
@@ -21,8 +20,7 @@ export function Academics() {
       year: "2022 - 2026",
       score: "CPI: 8.58",
       details: "Currently pursuing Bachelor of Technology. Hold 6th position in the department.",
-      subjects: ["Electrical and Electronics Engineering"],
-      hoverColor: "group-hover:shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+      subjects: ["Electrical and Electronics Engineering"]
     },
     {
       title: "Senior Secondary (12th)",
@@ -30,8 +28,7 @@ export function Academics() {
       year: "2022",
       score: "94.2%",
       details: "CBSE Board. Secured admission into IIT by qualifying JEE Mains & Advanced.",
-      subjects: ["Physics", "Chemistry", "Maths", "Computer Science"],
-      hoverColor: "group-hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
+      subjects: ["Physics", "Chemistry", "Maths", "Computer Science"]
     },
     {
       title: "Secondary (10th)",
@@ -39,8 +36,7 @@ export function Academics() {
       year: "2020",
       score: "96.4%",
       details: "CBSE Board. Consistently maintained academic excellence.",
-      subjects: ["Science", "Maths", "Computer Science"],
-      hoverColor: "group-hover:shadow-[0_0_20px_rgba(34,197,94,0.2)]"
+      subjects: ["Science", "Maths", "Computer Science"]
     }
   ];
 
@@ -71,15 +67,15 @@ export function Academics() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="h-full"
             >
-              <div className={`relative group h-full ${item.hoverColor} transition-all duration-500`}>
+              <div className="relative group h-full">
                 {/* Gradient Border Effect */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-15 group-hover:opacity-40 transition-all duration-500"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-10 group-hover:opacity-20 transition-all duration-500"></div>
                 
                 {/* Card */}
-                <Card className="relative bg-card/50 backdrop-blur border border-border/40 p-6 h-full flex flex-col overflow-hidden group-hover:bg-card/70 group-hover:border-primary/40 transition-all duration-500">
+                <Card className="relative bg-card/50 backdrop-blur border border-border/40 p-6 h-full flex flex-col overflow-hidden group-hover:bg-card/60 group-hover:border-border/60 transition-all duration-500">
                   {/* Icon */}
                   <div className="relative z-10 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center transition-colors duration-300">
                       <GraduationCap className="w-5 h-5" />
                     </div>
                   </div>
@@ -87,49 +83,53 @@ export function Academics() {
                   {/* Title and Year */}
                   <div className="relative z-10 mb-3">
                     <div className="flex items-start justify-between gap-2 mb-1">
-                      <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                      <h3 className="text-lg font-semibold text-foreground">
                         {item.title}
                       </h3>
                     </div>
                     <Badge 
                       variant="outline" 
-                      className="text-xs bg-primary/5 text-primary border-primary/20 group-hover:bg-primary/15 group-hover:border-primary/40 transition-all duration-300"
+                      className="text-xs bg-primary/5 text-primary border-primary/20 transition-all duration-300"
                     >
                       {item.year}
                     </Badge>
                   </div>
 
                   {/* Institution */}
-                  <div className="relative z-10 mb-3">
-                    <p className="text-sm text-muted-foreground group-hover:text-foreground/70 transition-colors duration-300">
+                  <div className="relative z-10 mb-4">
+                    <p className="text-sm text-muted-foreground">
                       {item.institution}
                     </p>
                   </div>
 
+                  {/* Subjects First */}
+                  <div className="relative z-10 mb-4">
+                    <div className="flex flex-wrap gap-2">
+                      {item.subjects.map((subject, idx) => (
+                        <Badge 
+                          key={idx}
+                          variant="secondary"
+                          className="text-xs bg-accent/10 text-accent border-0"
+                        >
+                          {subject}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
                   {/* Performance Score */}
-                  <div className="relative z-10 mb-4 p-3 rounded-lg bg-primary/5 border border-primary/10 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all duration-500">
+                  <div className="relative z-10 mb-4 p-3 rounded-lg bg-primary/5 border border-primary/10 transition-all duration-500">
                     <div className="text-xs text-muted-foreground font-medium mb-1">Performance</div>
                     <div className="text-xl font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                       {item.score}
                     </div>
                   </div>
 
-                  {/* Subjects/Details */}
+                  {/* Description */}
                   <div className="relative z-10 flex-grow">
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       {item.details}
                     </p>
-                    <div className="flex flex-wrap gap-1">
-                      {item.subjects.map((subject, idx) => (
-                        <Badge 
-                          key={idx}
-                          variant="secondary"
-                          className="text-xs bg-accent/10 text-accent border-0 group-hover:bg-accent/20 transition-colors duration-300"
-                        >
-                          {subject}
-                        </Badge>
-                      ))}
-                    </div>
                   </div>
                 </Card>
               </div>
