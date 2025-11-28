@@ -2,10 +2,10 @@ import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { Academics } from "@/components/academics";
 import { Skills } from "@/components/skills";
+import { SoftSkills } from "@/components/soft-skills";
 import { Experience } from "@/components/experience";
 import { Projects } from "@/components/projects";
 import { Achievements } from "@/components/achievements";
-import { SoftSkills } from "@/components/soft-skills";
 import { Por } from "@/components/por";
 import { Contact } from "@/components/contact";
 
@@ -17,10 +17,10 @@ export default function Home() {
         <Hero />
         <Academics />
         <Skills />
+        <SoftSkills />
         <Experience />
         <Projects />
         <Achievements />
-        <SoftSkills />
         <Por />
         <Contact />
       </main>

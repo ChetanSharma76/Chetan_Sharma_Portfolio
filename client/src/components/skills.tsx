@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiReact, SiNodedotjs, SiExpress, SiMongodb, SiMysql, SiDocker, SiAmazon, SiBootstrap, SiTailwindcss } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
-import { Database } from "lucide-react";
 
 export function Skills() {
   const skillCategories = [
@@ -20,8 +19,8 @@ export function Skills() {
       title: "Backend",
       skills: [
         { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-        { name: "Express", icon: SiExpress, color: "#000000" },
-        { name: "REST API", icon: TbApi, color: "#ffffff" },
+        { name: "Express", icon: SiExpress, color: "#ffffff" },
+        { name: "REST API", icon: TbApi, color: "#61DAFB" },
       ]
     },
     {
@@ -56,31 +55,41 @@ export function Skills() {
           <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="space-y-12">
           {skillCategories.map((category, index) => (
-            <div key={index} className="space-y-6">
-              <h3 className="text-xl font-bold text-center text-muted-foreground border-b border-white/10 pb-2">{category.title}</h3>
-              <div className="grid grid-cols-1 gap-4">
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <h3 className="text-2xl font-bold text-white font-heading">{category.title}</h3>
+                <div className="h-[1px] flex-grow bg-white/10"></div>
+              </div>
+              
+              <div className="flex flex-wrap gap-4">
                 {category.skills.map((skill, i) => (
                   <motion.div
                     key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: (index * 0.1) + (i * 0.05) }}
                   >
                     <TiltCard className="h-full">
-                      <div className="bg-card/30 backdrop-blur-md border border-white/5 hover:border-white/20 rounded-xl p-4 flex items-center gap-4 transition-all group">
-                        <div className="p-3 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors" style={{ color: skill.color }}>
-                          <skill.icon className="w-6 h-6" />
+                      <div className="bg-card/40 backdrop-blur-md border border-white/5 hover:border-primary/30 rounded-xl px-6 py-4 flex items-center gap-3 transition-all group hover:shadow-lg hover:shadow-primary/10">
+                        <div className="text-2xl group-hover:scale-110 transition-transform duration-300" style={{ color: skill.color }}>
+                          <skill.icon />
                         </div>
-                        <span className="font-medium text-white group-hover:text-primary transition-colors">{skill.name}</span>
+                        <span className="font-medium text-muted-foreground group-hover:text-white transition-colors">{skill.name}</span>
                       </div>
                     </TiltCard>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

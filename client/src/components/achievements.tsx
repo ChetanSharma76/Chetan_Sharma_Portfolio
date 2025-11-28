@@ -9,7 +9,8 @@ export function Achievements() {
       icon: SiLeetcode,
       rating: "1875",
       rank: "Knight Badge",
-      desc: "Top 4% globally. Ranked 975/25,000+ in Weekly Contest 422.",
+      solved: "500+",
+      desc: "Ranked 975/25,000+ in Weekly Contest 422.",
       color: "#FFA116",
       link: "https://leetcode.com/"
     },
@@ -18,7 +19,8 @@ export function Achievements() {
       icon: SiCodechef,
       rating: "1736",
       rank: "3-Star",
-      desc: "Top 5% in Starters 152. Consistently participating in contests.",
+      solved: "250+",
+      desc: "Top 5% in Starters 152.",
       color: "#5B4638",
       link: "https://www.codechef.com/"
     },
@@ -27,17 +29,15 @@ export function Achievements() {
       icon: SiCodeforces,
       rating: "1395",
       rank: "Pupil",
-      desc: "Max rating 1395. Maintained a 160+ day coding streak.",
+      solved: "300+",
+      desc: "Maintained a 160+ day coding streak.",
       color: "#1F8ACB",
       link: "https://codeforces.com/"
     }
   ];
 
   return (
-    <section id="achievements" className="py-24 bg-black/20 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
-
+    <section id="achievements" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -71,8 +71,20 @@ export function Achievements() {
                       </div>
                       
                       <h3 className="text-2xl font-bold mb-2 font-heading">{platform.name}</h3>
-                      <div className="text-3xl font-bold text-white mb-1 tracking-tight">{platform.rating}</div>
-                      <div className="text-sm font-medium text-primary mb-4 uppercase tracking-wider px-3 py-1 bg-primary/10 rounded-full">{platform.rank}</div>
+                      
+                      <div className="flex items-center justify-center gap-4 mb-4 w-full">
+                         <div className="text-center">
+                            <div className="text-2xl font-bold text-white tracking-tight">{platform.rating}</div>
+                            <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Rating</div>
+                         </div>
+                         <div className="w-[1px] h-8 bg-white/10"></div>
+                         <div className="text-center">
+                            <div className="text-2xl font-bold text-primary tracking-tight">{platform.solved}</div>
+                            <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Solved</div>
+                         </div>
+                      </div>
+
+                      <div className="text-sm font-medium text-white/80 mb-4 uppercase tracking-wider px-3 py-1 bg-white/5 rounded-full border border-white/10">{platform.rank}</div>
                       
                       <p className="text-muted-foreground text-sm leading-relaxed">
                         {platform.desc}
