@@ -37,17 +37,20 @@ export function Nav() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="relative group">
-          <span className="text-2xl font-heading font-bold tracking-tighter text-foreground group-hover:text-primary transition-colors">
-            CS<span className="text-primary">.</span>
-          </span>
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-        </a>
+      <div className="container mx-auto px-6 flex items-center justify-center relative">
+        {/* Logo - Fixed on Left */}
+        <div className="absolute left-6">
+          <a href="#" className="relative group">
+            <span className="text-2xl font-heading font-bold tracking-tighter text-foreground group-hover:text-primary transition-colors">
+              CS<span className="text-primary">.</span>
+            </span>
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+          </a>
+        </div>
 
-        {/* Desktop Nav */}
+        {/* Desktop Nav - Centered */}
         <nav className="hidden md:flex items-center gap-2">
-          <div className="flex items-center bg-background/50 rounded-full px-2 py-1 border border-border backdrop-blur-md mr-4">
+          <div className="flex items-center bg-background/50 rounded-full px-2 py-1 border border-border backdrop-blur-md">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -58,13 +61,16 @@ export function Nav() {
               </a>
             ))}
           </div>
-          
+        </nav>
+
+        {/* Right Side - Fixed on Right */}
+        <div className="absolute right-6 flex items-center gap-3">
           {mounted && (
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="rounded-full text-foreground hover:bg-accent/10 mr-2"
+              className="rounded-full text-foreground hover:bg-accent/10"
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
@@ -79,7 +85,7 @@ export function Nav() {
               <FileText className="mr-2 h-4 w-4" /> Resume
             </a>
           </Button>
-        </nav>
+        </div>
 
         {/* Mobile Nav */}
         <Sheet>
