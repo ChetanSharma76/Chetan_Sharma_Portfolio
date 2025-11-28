@@ -118,7 +118,7 @@ export function Hero() {
             <h1 className="text-5xl md:text-7xl font-heading font-bold leading-[1.1] mb-6 text-foreground">
               Hi, I'm Chetan <br />
               <span className="text-4xl md:text-5xl block mt-2">
-                <TypewriterText texts={["Software Engineer", "Developer", "Problem Solver", "Designer"]} />
+                <TypewriterText texts={["Software Engineer", "Developer", "Problem Solver", "Tech Enthusiast"]} />
               </span>
             </h1>
             
@@ -127,8 +127,7 @@ export function Hero() {
             </p>
 
             <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
-              Turning complex problems into elegant, pixel-perfect solutions. 
-              Specializing in MERN stack and creating immersive web experiences.
+              A passionate Software Developer specializing in building scalable web applications and clean, efficient solutions. I love turning ideas into real, impactful products through code.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-8">
@@ -139,8 +138,10 @@ export function Hero() {
             </div>
 
             <div className="flex flex-wrap gap-5">
-              <Button size="lg" className="h-14 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-medium text-lg transition-all hover:scale-105 shadow-lg shadow-primary/25">
-                View Projects <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="h-14 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-medium text-lg transition-all hover:scale-105 shadow-lg shadow-primary/25" asChild>
+                <a href="#projects">
+                  View Projects <ArrowRight className="ml-2 h-5 w-5" />
+                </a>
               </Button>
               
               <Button size="lg" variant="outline" className="h-14 rounded-full border-border hover:bg-accent/10 text-foreground px-8 font-medium text-lg transition-all hover:scale-105" asChild>
@@ -153,7 +154,7 @@ export function Hero() {
             <div className="mt-10 flex items-center gap-4">
               {[
                 { icon: Github, href: "https://github.com/ChetanSharma76" },
-                { icon: Linkedin, href: "https://linkedin.com" },
+                { icon: Linkedin, href: "https://linkedin.com/in/chetan-sharma-70ba70270" },
                 { icon: Mail, href: "mailto:chetansharma752005@gmail.com" }
               ].map((social, i) => (
                 <a 

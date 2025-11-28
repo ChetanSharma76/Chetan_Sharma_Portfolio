@@ -63,7 +63,7 @@ export function Skills() {
           viewport={{ once: true }}
           className="mb-20 text-center"
         >
-          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Tech <span className="text-gradient">Technologies</span></h2>
+          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Tech <span className="text-gradient">Skills</span></h2>
           <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
         </motion.div>
 
