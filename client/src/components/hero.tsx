@@ -183,9 +183,9 @@ export function Hero() {
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
                   <div className="relative w-[220px] h-[280px] rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20 bg-card/40 backdrop-blur-sm transform rotate-[-5deg] hover:rotate-0 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40">
                     <img 
-                      src="/profile-photo.jpg" 
+                      src="/profile-photo.png" 
                       alt="Chetan Sharma" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain bg-gradient-to-b from-transparent to-black/20"
                       data-testid="img-profile-photo"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
