@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { TiltCard } from "@/components/ui/tilt-card";
-import { SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiReact, SiNodedotjs, SiExpress, SiMongodb, SiMysql, SiDocker, SiAmazon, SiBootstrap, SiTailwindcss } from "react-icons/si";
+import { SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiReact, SiNodedotjs, SiExpress, SiMongodb, SiMysql, SiDocker, SiAmazon, SiBootstrap, SiTailwindcss, SiEjs, SiGithub, SiGit, SiVisualstudio, SiSublimetext, SiPostman } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
 
 export function Skills() {
@@ -9,6 +9,7 @@ export function Skills() {
       title: "Frontend",
       skills: [
         { name: "React.js", icon: SiReact, color: "#61DAFB" },
+        { name: "EJS", icon: SiEjs, color: "#90C53F" },
         { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4" },
         { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
         { name: "CSS3", icon: SiCss3, color: "#1572B6" },
@@ -39,6 +40,16 @@ export function Skills() {
         { name: "Docker", icon: SiDocker, color: "#2496ED" },
         { name: "AWS", icon: SiAmazon, color: "#FF9900" },
       ]
+    },
+    {
+      title: "Version Control & Tools",
+      skills: [
+        { name: "GitHub", icon: SiGithub, color: "currentColor" },
+        { name: "Git", icon: SiGit, color: "#F1502F" },
+        { name: "VS Code", icon: SiVisualstudio, color: "#007ACC" },
+        { name: "Sublime", icon: SiSublimetext, color: "#FF9900" },
+        { name: "Postman", icon: SiPostman, color: "#FF6C37" },
+      ]
     }
   ];
 
@@ -51,7 +62,7 @@ export function Skills() {
           viewport={{ once: true }}
           className="mb-20 text-center"
         >
-          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Tech <span className="text-gradient">Stack</span></h2>
+          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Tech <span className="text-gradient">Technologies</span></h2>
           <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
         </motion.div>
 
