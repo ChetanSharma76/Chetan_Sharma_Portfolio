@@ -8,7 +8,7 @@ export function Experience() {
       role: "Software Development Extern",
       company: "AlgoUniversity",
       period: "May 2025 – Jun 2025",
-      desc: "Developed a comprehensive online judge platform. Engineered a robust full-stack application using MERN Stack with Docker containerization and AWS Deployment. Implemented AI-powered code review system.",
+      desc: "Built a full-stack, Docker-containerized online judge platform using the MERN stack and AWS to deliver secure code evaluation with AI-powered automated reviews. This system streamlined AlgoUniversity’s programming assessments, reduced code-execution vulnerabilities by 95%, and earned strong positive feedback for its reliability and ease of use.",
       tags: ["MERN", "Docker", "AWS", "AI Integration"]
     }
   ];

@@ -20,7 +20,7 @@ export function SoftSkills() {
     },
     {
       title: "Problem Solving",
-      desc: "Analytical approach honed through 500+ algorithmic problems.",
+      desc: "Analytical approach honed through 1500+ algorithmic problems.",
       icon: Lightbulb
     }
   ];

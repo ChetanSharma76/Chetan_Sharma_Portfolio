@@ -15,11 +15,10 @@ interface AcademicItem {
 export function Academics() {
   const academics: AcademicItem[] = [
     {
-      title: "B.Tech in EEE",
+      title: "Bachelor of Technology (B.Tech)",
       institution: "Indian Institute of Technology (IIT) Patna",
       year: "2022 - 2026",
       score: "CPI: 8.58",
-      details: "Pursuing Electrical and Electronics Engineering with focus on full-stack development and competitive programming.",
       subjects: ["Electrical and Electronics Engineering"]
     },
     {
@@ -27,15 +26,13 @@ export function Academics() {
       institution: "M.P.S.M. Grace Convent Sr. Sec. School",
       year: "2022",
       score: "94.2%",
-      details: "Scored 94.2% with distinction in Science stream.",
-      subjects: ["Physics", "Chemistry", "Maths", "Computer Science"]
+      subjects: ["Physics", "Chemistry", "Maths"]
     },
     {
       title: "Secondary (10th)",
       institution: "M.P.S.M. Grace Convent Sr. Sec. School",
       year: "2020",
-      score: "96.4%",
-      details: "Achieved 96.4% with outstanding performance across all subjects.",
+      score: "94.4%",
       subjects: ["Science", "Maths", "Computer Science"]
     }
   ];
@@ -97,7 +94,7 @@ export function Academics() {
 
                   {/* Institution */}
                   <div className="relative z-10 mb-4">
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-semibold">
                       {item.institution}
                     </p>
                   </div>

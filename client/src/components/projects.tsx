@@ -3,29 +3,29 @@ import { ExternalLink, Github } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TiltCard } from "@/components/ui/tilt-card"; // Import TiltCard
-import medicareImg from "@assets/generated_images/3d_medical_cross_icon_for_healthcare_project.png";
-import wanderImg from "@assets/generated_images/3d_globe_or_travel_icon_for_travel_project.png";
-import algoImg from "@assets/generated_images/3d_code_or_algorithm_concept_for_coding_project.png";
+import medicareImg from "@assets/generated_images/Medicare_Screenshot.png";
+import wanderImg from "@assets/generated_images/Wonderworld_Screenshot.png";
+import algoImg from "@assets/generated_images/OJ_Screenshot.png";
 
 export function Projects() {
   const projects = [
+    {
+      title: "OptiCode",
+      desc: "Comprehensive online judge platform with AI-powered code review system. reduced security vulnerabilities by 95% using Docker sandboxing.",
+      tags: ["MERN", "Docker", "AWS", "LLM"],
+      image: algoImg,
+      link: "https://opticodeoj.vercel.app/",
+      github: "https://github.com/ChetanSharma76/OptiCode",
+      color: "from-purple-500/20 to-pink-600/20"
+    },
     {
       title: "Medicare",
       desc: "A medical appointment platform streamlining scheduling. Features doctor specialty sorting, real-time booking, and Razorpay integration.",
       tags: ["React.js", "Node.js", "MongoDB", "Razorpay"],
       image: medicareImg,
-      link: "#",
-      github: "#",
+      link: "https://medicare-frontend-a8f1.onrender.com",
+      github: "https://github.com/ChetanSharma76/medicare",
       color: "from-cyan-500/20 to-blue-600/20"
-    },
-    {
-      title: "AlgoUniversity Judge",
-      desc: "Comprehensive online judge platform with AI-powered code review system. reduced security vulnerabilities by 95% using Docker sandboxing.",
-      tags: ["MERN", "Docker", "AWS", "LLM"],
-      image: algoImg,
-      link: "#",
-      github: "#",
-      color: "from-purple-500/20 to-pink-600/20"
     },
     {
       title: "Wanderworld",
@@ -33,7 +33,7 @@ export function Projects() {
       tags: ["EJS", "Express", "MongoDB", "Cloudinary"],
       image: wanderImg,
       link: "#",
-      github: "#",
+      github: "https://github.com/ChetanSharma76/Project-WanderWorld",
       color: "from-orange-500/20 to-amber-600/20"
     }
   ];
@@ -70,7 +70,7 @@ export function Projects() {
                     <motion.img 
                       src={project.image} 
                       alt={project.title}
-                      className="w-40 h-40 object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6 group-hover:-translate-y-2"
+                      className="w-full h-full object-cover drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6 group-hover:-translate-y-2"
                       style={{ transformStyle: "preserve-3d", transform: "translateZ(50px)" }}
                     />
                   </div>
