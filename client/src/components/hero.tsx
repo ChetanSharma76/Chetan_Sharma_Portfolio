@@ -121,10 +121,6 @@ export function Hero() {
                 <TypewriterText texts={["Software Engineer", "Developer", "Problem Solver", "Tech Enthusiast"]} />
               </span>
             </h1>
-            
-            <p className="text-xl md:text-2xl text-foreground/90 font-medium mb-4">
-              Software Engineer
-            </p>
 
             <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
               A passionate Software Developer specializing in building scalable web applications and clean, efficient solutions. I love turning ideas into real, impactful products through code.
@@ -185,7 +181,7 @@ export function Hero() {
                     <img 
                       src="/profile-photo.png" 
                       alt="Chetan Sharma" 
-                      className="w-full h-full object-cover bg-gradient-to-b from-transparent to-black/20 brightness-125"
+                      className="w-full h-full object-cover bg-gradient-to-b from-transparent to-black/20 brightness-110"
                       data-testid="img-hero-profile"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
