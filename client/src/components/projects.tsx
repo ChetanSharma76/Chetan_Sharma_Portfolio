@@ -63,7 +63,7 @@ export function Projects() {
             >
               <TiltCard className="perspective-1000">
                 <Card className="group overflow-hidden bg-card/40 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-500 h-full flex flex-col shadow-2xl dark:shadow-black/40 shadow-primary/5">
-                  <div className={`relative h-56 overflow-hidden bg-gradient-to-br ${project.color} p-8 flex items-center justify-center`}>
+                  <div className={`relative h-56 overflow-hidden bg-gradient-to-br ${project.color}`}>
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
                     <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.5))]" />
                     
