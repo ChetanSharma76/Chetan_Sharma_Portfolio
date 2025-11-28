@@ -108,26 +108,38 @@ export function Academics() {
           <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
         </motion.div>
 
-        <div className="lg:hidden flex flex-col gap-8 mt-10">
+        <div className="flex flex-col gap-8 mt-10 w-full">
            {academics.map((item, i) => (
              <motion.div 
                key={i}
                initial={{ opacity: 0, y: 20 }}
                whileInView={{ opacity: 1, y: 0 }}
                transition={{ delay: i * 0.2 }}
+               className="w-full"
              >
-                <Card className="bg-card/50 border-border p-6 backdrop-blur-sm relative overflow-hidden">
-                   <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-bl-full" />
-                   <div className="relative z-10">
-                     <h3 className="text-xl font-bold text-foreground mb-1">{item.title}</h3>
-                     <p className="text-primary text-sm mb-4">{item.institution}</p>
-                     <div className="flex justify-between items-center mb-4">
-                        <span className="text-sm text-muted-foreground">{item.year}</span>
-                        <span className="font-bold text-accent">{item.score}</span>
+                <div className="relative group">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
+                  <Card className="bg-card border border-border p-8 backdrop-blur-xl relative overflow-hidden">
+                     <div className="absolute -top-6 left-6 w-12 h-12 bg-background border border-border rounded-xl flex items-center justify-center shadow-lg transform -rotate-12 group-hover:rotate-0 transition-transform duration-300">
+                       <GraduationCap className="w-6 h-6 text-primary" />
                      </div>
-                     <p className="text-sm text-muted-foreground">{item.details}</p>
-                   </div>
-                </Card>
+                     <div className="relative z-10 mt-4">
+                       <div className="flex justify-between items-start mb-3">
+                         <h3 className="text-2xl font-bold text-foreground">{item.title}</h3>
+                         <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">{item.year}</Badge>
+                       </div>
+                       <div className="flex items-center gap-2 text-muted-foreground mb-5 text-sm">
+                         <School className="w-4 h-4" />
+                         {item.institution}
+                       </div>
+                       <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-4 mb-5 border border-primary/20">
+                         <div className="text-xs text-muted-foreground uppercase tracking-wider mb-2 font-semibold">Performance</div>
+                         <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{item.score}</div>
+                       </div>
+                       <p className="text-base text-muted-foreground leading-relaxed">{item.details}</p>
+                     </div>
+                  </Card>
+                </div>
              </motion.div>
            ))}
         </div>

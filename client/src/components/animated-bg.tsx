@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 function Sparkles() {
   const points = useRef<THREE.Points>(null);
-  const particleCount = 600;
+  const particleCount = 80;
 
   const positions = useMemo(() => {
     const pos = new Float32Array(particleCount * 3);
@@ -56,7 +56,6 @@ function Sparkles() {
           count={particleCount}
           array={positions}
           itemSize={3}
-          args={[positions, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
