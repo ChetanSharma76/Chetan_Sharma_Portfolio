@@ -123,7 +123,7 @@ export function Hero() {
             </h1>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-medium mb-4">
-              Full Stack Developer & Design Engineer
+              Software Engineer
             </p>
 
             <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
