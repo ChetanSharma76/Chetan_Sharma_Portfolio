@@ -30,7 +30,7 @@ function AcademicCard3D({ title, institution, year, score, details, position, de
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: delay, duration: 0.6 }}
-          className="w-[350px]"
+          className="w-[420px]"
         >
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
@@ -50,12 +50,12 @@ function AcademicCard3D({ title, institution, year, score, details, position, de
                   {institution}
                 </div>
 
-                <div className="bg-background/50 rounded-lg p-3 mb-4 border border-border">
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Performance</div>
-                  <div className="text-lg font-bold text-accent">{score}</div>
+                <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-4 mb-4 border border-primary/20">
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider mb-2 font-semibold">Performance</div>
+                  <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{score}</div>
                 </div>
 
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
                   {details}
                 </p>
               </div>

@@ -118,7 +118,7 @@ export function Hero() {
             <h1 className="text-5xl md:text-7xl font-heading font-bold leading-[1.1] mb-6 text-foreground">
               Hi, I'm Chetan <br />
               <span className="text-4xl md:text-5xl block mt-2">
-                I am a <TypewriterText texts={["Developer", "Problem Solver", "Designer", "Tech Enthusiast"]} />
+                <TypewriterText texts={["Software Engineer", "Developer", "Problem Solver", "Designer"]} />
               </span>
             </h1>
             
@@ -178,7 +178,7 @@ export function Hero() {
               initial={{ opacity: 0, scale: 0.8, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="absolute bottom-0 right-0 md:right-10 z-10 hidden lg:block"
+              className="absolute bottom-1/3 right-0 md:right-10 z-10 hidden lg:block"
             >
                <div className="relative w-[200px] h-[250px] rounded-2xl overflow-hidden border-2 border-border shadow-2xl shadow-black/20 bg-card/80 backdrop-blur-md transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300">
                   <div className="w-full h-full flex flex-col items-center justify-center text-center p-4">

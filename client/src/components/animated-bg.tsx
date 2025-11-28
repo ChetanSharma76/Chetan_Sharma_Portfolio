@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 function Sparkles() {
   const points = useRef<THREE.Points>(null);
-  const particleCount = 1500;
+  const particleCount = 600;
 
   const positions = useMemo(() => {
     const pos = new Float32Array(particleCount * 3);
@@ -19,9 +19,9 @@ function Sparkles() {
   const velocities = useMemo(() => {
     const vel = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount * 3; i += 3) {
-      vel[i] = (Math.random() - 0.5) * 0.2;
-      vel[i + 1] = (Math.random() - 0.5) * 0.2;
-      vel[i + 2] = (Math.random() - 0.5) * 0.2;
+      vel[i] = (Math.random() - 0.5) * 0.05;
+      vel[i + 1] = (Math.random() - 0.5) * 0.05;
+      vel[i + 2] = (Math.random() - 0.5) * 0.05;
     }
     return vel;
   }, []);
