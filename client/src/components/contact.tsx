@@ -27,7 +27,7 @@ export function Contact() {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Email</h4>
-                  <a href="mailto:chetansharma752005@gmail.com" className="text-lg font-medium hover:text-primary transition-colors">chetansharma752005@gmail.com</a>
+                  <a href="mailto:chetansharma752005@gmail.com" className="text-lg font-medium hover:text-primary transition-colors text-foreground">chetansharma752005@gmail.com</a>
                 </div>
               </div>
               
@@ -37,7 +37,7 @@ export function Contact() {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Phone</h4>
-                  <p className="text-lg font-medium">+91 7668751288</p>
+                  <p className="text-lg font-medium text-foreground">+91 7668751288</p>
                 </div>
               </div>
 
@@ -47,7 +47,7 @@ export function Contact() {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Location</h4>
-                  <p className="text-lg font-medium">Mathura, UP, India</p>
+                  <p className="text-lg font-medium text-foreground">Mathura, UP, India</p>
                 </div>
               </div>
             </div>
@@ -59,28 +59,28 @@ export function Contact() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="bg-card/50 border-white/10 backdrop-blur-md">
+            <Card className="bg-card/50 border-border backdrop-blur-md">
               <CardContent className="p-8">
                 <form className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">Name</label>
-                      <Input placeholder="John Doe" className="bg-white/5 border-white/10 focus:border-primary" />
+                      <label className="text-sm font-medium text-foreground">Name</label>
+                      <Input placeholder="John Doe" className="bg-background/50 border-border focus:border-primary" />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">Email</label>
-                      <Input placeholder="john@example.com" type="email" className="bg-white/5 border-white/10 focus:border-primary" />
+                      <label className="text-sm font-medium text-foreground">Email</label>
+                      <Input placeholder="john@example.com" type="email" className="bg-background/50 border-border focus:border-primary" />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Subject</label>
-                    <Input placeholder="Project collaboration" className="bg-white/5 border-white/10 focus:border-primary" />
+                    <label className="text-sm font-medium text-foreground">Subject</label>
+                    <Input placeholder="Project collaboration" className="bg-background/50 border-border focus:border-primary" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Message</label>
-                    <Textarea placeholder="Tell me about your project..." className="min-h-[150px] bg-white/5 border-white/10 focus:border-primary" />
+                    <label className="text-sm font-medium text-foreground">Message</label>
+                    <Textarea placeholder="Tell me about your project..." className="min-h-[150px] bg-background/50 border-border focus:border-primary" />
                   </div>
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-white h-12 text-lg" size="lg">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 text-lg" size="lg">
                     Send Message
                   </Button>
                 </form>

@@ -19,7 +19,7 @@ export function Skills() {
       title: "Backend",
       skills: [
         { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-        { name: "Express", icon: SiExpress, color: "#ffffff" },
+        { name: "Express", icon: SiExpress, color: "currentColor" },
         { name: "REST API", icon: TbApi, color: "#61DAFB" },
       ]
     },
@@ -65,8 +65,8 @@ export function Skills() {
               transition={{ delay: index * 0.1 }}
             >
               <div className="flex items-center gap-4 mb-6">
-                <h3 className="text-2xl font-bold text-white font-heading">{category.title}</h3>
-                <div className="h-[1px] flex-grow bg-white/10"></div>
+                <h3 className="text-2xl font-bold text-foreground font-heading">{category.title}</h3>
+                <div className="h-[1px] flex-grow bg-border"></div>
               </div>
               
               <div className="flex flex-wrap gap-4">
@@ -79,11 +79,11 @@ export function Skills() {
                     transition={{ delay: (index * 0.1) + (i * 0.05) }}
                   >
                     <TiltCard className="h-full">
-                      <div className="bg-card/40 backdrop-blur-md border border-white/5 hover:border-primary/30 rounded-xl px-6 py-4 flex items-center gap-3 transition-all group hover:shadow-lg hover:shadow-primary/10">
-                        <div className="text-2xl group-hover:scale-110 transition-transform duration-300" style={{ color: skill.color }}>
+                      <div className="bg-card/40 backdrop-blur-md border border-border hover:border-primary/30 rounded-xl px-6 py-4 flex items-center gap-3 transition-all group hover:shadow-lg hover:shadow-primary/10">
+                        <div className="text-2xl group-hover:scale-110 transition-transform duration-300" style={{ color: skill.color === 'currentColor' ? 'var(--foreground)' : skill.color }}>
                           <skill.icon />
                         </div>
-                        <span className="font-medium text-muted-foreground group-hover:text-white transition-colors">{skill.name}</span>
+                        <span className="font-medium text-muted-foreground group-hover:text-foreground transition-colors">{skill.name}</span>
                       </div>
                     </TiltCard>
                   </motion.div>

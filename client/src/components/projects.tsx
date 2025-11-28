@@ -62,7 +62,7 @@ export function Projects() {
               className="h-full"
             >
               <TiltCard className="perspective-1000">
-                <Card className="group overflow-hidden bg-card/40 backdrop-blur-sm border-white/10 hover:border-primary/50 transition-all duration-500 h-full flex flex-col shadow-2xl shadow-black/40">
+                <Card className="group overflow-hidden bg-card/40 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-500 h-full flex flex-col shadow-2xl dark:shadow-black/40 shadow-primary/5">
                   <div className={`relative h-56 overflow-hidden bg-gradient-to-br ${project.color} p-8 flex items-center justify-center`}>
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
                     <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.5))]" />
@@ -76,13 +76,13 @@ export function Projects() {
                   </div>
                   
                   <CardContent className="p-8 flex-grow relative z-20 bg-card/60">
-                    <h3 className="text-2xl font-bold mb-3 font-heading group-hover:text-primary transition-colors tracking-tight">{project.title}</h3>
+                    <h3 className="text-2xl font-bold mb-3 font-heading text-foreground group-hover:text-primary transition-colors tracking-tight">{project.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                       {project.desc}
                     </p>
                     <div className="flex flex-wrap gap-2 mt-auto">
                       {project.tags.map(tag => (
-                        <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-muted-foreground group-hover:border-primary/30 group-hover:text-primary/80 transition-colors">
+                        <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-md bg-background/50 border border-border text-muted-foreground group-hover:border-primary/30 group-hover:text-primary transition-colors">
                           {tag}
                         </span>
                       ))}
@@ -90,12 +90,12 @@ export function Projects() {
                   </CardContent>
 
                   <CardFooter className="p-8 pt-0 flex gap-4 bg-card/60">
-                    <Button size="sm" variant="outline" className="flex-1 border-white/10 hover:bg-primary hover:text-white hover:border-primary transition-all rounded-lg h-10" asChild>
+                    <Button size="sm" variant="outline" className="flex-1 border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all rounded-lg h-10" asChild>
                       <a href={project.github}>
                         <Github className="w-4 h-4 mr-2" /> Code
                       </a>
                     </Button>
-                    <Button size="sm" className="flex-1 bg-white/10 hover:bg-white/20 text-white rounded-lg h-10" asChild>
+                    <Button size="sm" className="flex-1 bg-background/50 hover:bg-background text-foreground rounded-lg h-10" asChild>
                       <a href={project.link}>
                         <ExternalLink className="w-4 h-4 mr-2" /> Demo
                       </a>

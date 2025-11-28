@@ -50,10 +50,10 @@ export function SoftSkills() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white/5 border border-white/10 p-6 rounded-xl hover:bg-white/10 transition-colors"
+                className="bg-card/50 border border-border p-6 rounded-xl hover:bg-accent/5 transition-colors shadow-sm"
               >
                 <skill.icon className="w-8 h-8 text-accent mb-4" />
-                <h3 className="text-lg font-bold mb-2">{skill.title}</h3>
+                <h3 className="text-lg font-bold mb-2 text-foreground">{skill.title}</h3>
                 <p className="text-sm text-muted-foreground">{skill.desc}</p>
               </motion.div>
             ))}

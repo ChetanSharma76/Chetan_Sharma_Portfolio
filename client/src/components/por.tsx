@@ -21,7 +21,7 @@ export function Por() {
   ];
 
   return (
-    <section className="py-24 bg-card/30 border-y border-white/5">
+    <section className="py-24 bg-card/30 border-y border-border">
       <div className="container mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -43,11 +43,11 @@ export function Por() {
               className="relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-              <div className="relative bg-background border border-white/10 p-8 rounded-xl h-full hover:-translate-y-2 transition-transform duration-300">
+              <div className="relative bg-background border border-border p-8 rounded-xl h-full hover:-translate-y-2 transition-transform duration-300 shadow-lg">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
                   <Award className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">{pos.role}</h3>
+                <h3 className="text-xl font-bold mb-2 text-foreground">{pos.role}</h3>
                 <p className="text-accent font-medium mb-4 text-sm">{pos.org}</p>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {pos.desc}

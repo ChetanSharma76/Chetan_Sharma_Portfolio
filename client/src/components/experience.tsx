@@ -26,7 +26,7 @@ export function Experience() {
           <div className="h-1 w-20 bg-primary rounded-full" />
         </motion.div>
 
-        <div className="relative border-l border-white/10 ml-4 md:ml-6 space-y-12">
+        <div className="relative border-l border-border ml-4 md:ml-6 space-y-12">
           {experiences.map((exp, index) => (
             <motion.div 
               key={index}
@@ -38,7 +38,7 @@ export function Experience() {
             >
               <div className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-background" />
               
-              <Card className="bg-card/50 backdrop-blur-sm border-white/5 hover:border-primary/50 transition-colors">
+              <Card className="bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-colors">
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
                     <div>
@@ -48,7 +48,7 @@ export function Experience() {
                         {exp.company}
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground bg-white/5 px-3 py-1 rounded-full w-fit">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground bg-background/50 px-3 py-1 rounded-full w-fit border border-border">
                       <Calendar className="w-3 h-3" />
                       {exp.period}
                     </div>

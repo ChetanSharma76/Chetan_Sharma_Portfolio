@@ -60,31 +60,31 @@ export function Achievements() {
             >
               <a href={platform.link} target="_blank" rel="noreferrer" className="block h-full">
                 <TiltCard className="h-full">
-                  <div className="bg-card/40 backdrop-blur-xl border border-white/10 p-8 rounded-2xl hover:bg-card/60 transition-all group h-full relative overflow-hidden">
+                  <div className="bg-card/40 backdrop-blur-xl border border-border p-8 rounded-2xl hover:bg-card/60 transition-all group h-full relative overflow-hidden">
                     
                     {/* Hover Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     <div className="flex flex-col items-center text-center relative z-10">
-                      <div className="p-4 rounded-2xl bg-white/5 mb-6 border border-white/5 group-hover:border-white/20 transition-colors shadow-lg">
+                      <div className="p-4 rounded-2xl bg-background/50 mb-6 border border-border group-hover:border-primary/20 transition-colors shadow-lg">
                         <platform.icon className="w-12 h-12" style={{ color: platform.color }} />
                       </div>
                       
-                      <h3 className="text-2xl font-bold mb-2 font-heading">{platform.name}</h3>
+                      <h3 className="text-2xl font-bold mb-2 font-heading text-foreground">{platform.name}</h3>
                       
                       <div className="flex items-center justify-center gap-4 mb-4 w-full">
                          <div className="text-center">
-                            <div className="text-2xl font-bold text-white tracking-tight">{platform.rating}</div>
+                            <div className="text-2xl font-bold text-foreground tracking-tight">{platform.rating}</div>
                             <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Rating</div>
                          </div>
-                         <div className="w-[1px] h-8 bg-white/10"></div>
+                         <div className="w-[1px] h-8 bg-border"></div>
                          <div className="text-center">
                             <div className="text-2xl font-bold text-primary tracking-tight">{platform.solved}</div>
                             <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Solved</div>
                          </div>
                       </div>
 
-                      <div className="text-sm font-medium text-white/80 mb-4 uppercase tracking-wider px-3 py-1 bg-white/5 rounded-full border border-white/10">{platform.rank}</div>
+                      <div className="text-sm font-medium text-foreground/80 mb-4 uppercase tracking-wider px-3 py-1 bg-background/50 rounded-full border border-border">{platform.rank}</div>
                       
                       <p className="text-muted-foreground text-sm leading-relaxed">
                         {platform.desc}

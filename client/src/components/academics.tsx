@@ -34,14 +34,14 @@ function AcademicCard3D({ title, institution, year, score, details, position, de
         >
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
-            <div className="relative bg-card border border-white/10 p-6 rounded-2xl shadow-xl backdrop-blur-xl h-full">
-              <div className="absolute -top-6 left-6 w-12 h-12 bg-background border border-white/10 rounded-xl flex items-center justify-center shadow-lg transform -rotate-12 group-hover:rotate-0 transition-transform duration-300">
+            <div className="relative bg-card border border-border p-6 rounded-2xl shadow-xl backdrop-blur-xl h-full">
+              <div className="absolute -top-6 left-6 w-12 h-12 bg-background border border-border rounded-xl flex items-center justify-center shadow-lg transform -rotate-12 group-hover:rotate-0 transition-transform duration-300">
                 <GraduationCap className="w-6 h-6 text-primary" />
               </div>
               
               <div className="mt-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-white">{title}</h3>
+                  <h3 className="text-xl font-bold text-foreground">{title}</h3>
                   <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">{year}</Badge>
                 </div>
                 
@@ -50,7 +50,7 @@ function AcademicCard3D({ title, institution, year, score, details, position, de
                   {institution}
                 </div>
 
-                <div className="bg-white/5 rounded-lg p-3 mb-4">
+                <div className="bg-background/50 rounded-lg p-3 mb-4 border border-border">
                   <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Performance</div>
                   <div className="text-lg font-bold text-accent">{score}</div>
                 </div>
@@ -108,7 +108,6 @@ export function Academics() {
           <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
         </motion.div>
 
-        {/* Mobile View (List) */}
         <div className="lg:hidden flex flex-col gap-8 mt-10">
            {academics.map((item, i) => (
              <motion.div 
@@ -117,10 +116,10 @@ export function Academics() {
                whileInView={{ opacity: 1, y: 0 }}
                transition={{ delay: i * 0.2 }}
              >
-                <Card className="bg-card/50 border-white/10 p-6 backdrop-blur-sm relative overflow-hidden">
+                <Card className="bg-card/50 border-border p-6 backdrop-blur-sm relative overflow-hidden">
                    <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-bl-full" />
                    <div className="relative z-10">
-                     <h3 className="text-xl font-bold text-white mb-1">{item.title}</h3>
+                     <h3 className="text-xl font-bold text-foreground mb-1">{item.title}</h3>
                      <p className="text-primary text-sm mb-4">{item.institution}</p>
                      <div className="flex justify-between items-center mb-4">
                         <span className="text-sm text-muted-foreground">{item.year}</span>
@@ -133,7 +132,6 @@ export function Academics() {
            ))}
         </div>
 
-        {/* Desktop View (3D Canvas) */}
         <div className="hidden lg:block h-[500px] w-full">
           <Canvas camera={{ position: [0, 0, 6], fov: 40 }}>
             <ambientLight intensity={0.5} />
@@ -141,7 +139,7 @@ export function Academics() {
             <Suspense fallback={<Loader />}>
               <group position={[0, 0, 0]}>
                 {academics.map((item, index) => (
-                  // @ts-ignore - position type mismatch in generic Three types vs R3F
+                  // @ts-ignore
                   <AcademicCard3D 
                     key={index}
                     {...item}
@@ -151,7 +149,6 @@ export function Academics() {
                 ))}
               </group>
             </Suspense>
-            {/* Remove OrbitControls to keep it static template style, or add with restrictions */}
           </Canvas>
         </div>
       </div>
