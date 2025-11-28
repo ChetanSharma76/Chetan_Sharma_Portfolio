@@ -138,10 +138,8 @@ export function Hero() {
             </div>
 
             <div className="flex flex-wrap gap-5">
-              <Button size="lg" className="h-14 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-medium text-lg transition-all hover:scale-105 shadow-lg shadow-primary/25" asChild>
-                <a href="#projects">
-                  View Projects <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
+              <Button size="lg" className="h-14 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-medium text-lg transition-all hover:scale-105 shadow-lg shadow-primary/25">
+                View Projects <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               
               <Button size="lg" variant="outline" className="h-14 rounded-full border-border hover:bg-accent/10 text-foreground px-8 font-medium text-lg transition-all hover:scale-105" asChild>
@@ -181,12 +179,16 @@ export function Hero() {
               transition={{ duration: 1, delay: 0.5 }}
               className="absolute bottom-1/3 right-0 md:right-10 z-10 hidden lg:block"
             >
-               <div className="relative w-[200px] h-[250px] rounded-2xl overflow-hidden border-2 border-border shadow-2xl shadow-black/20 bg-card/80 backdrop-blur-md transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300">
-                  <div className="w-full h-full flex flex-col items-center justify-center text-center p-4">
-                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-2 text-primary">
-                      <User className="w-8 h-8" />
-                    </div>
-                    <p className="text-xs text-muted-foreground">Paste Photo Here</p>
+               <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
+                  <div className="relative w-[220px] h-[280px] rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20 bg-card/40 backdrop-blur-sm transform rotate-[-5deg] hover:rotate-0 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40">
+                    <img 
+                      src="/profile-photo.jpg" 
+                      alt="Chetan Sharma" 
+                      className="w-full h-full object-cover"
+                      data-testid="img-profile-photo"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                   </div>
                </div>
             </motion.div>
