@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { TiltCard } from "@/components/ui/tilt-card"; // Import TiltCard
 import medicareImg from "@assets/generated_images/3d_medical_cross_icon_for_healthcare_project.png";
 import wanderImg from "@assets/generated_images/3d_globe_or_travel_icon_for_travel_project.png";
 import algoImg from "@assets/generated_images/3d_code_or_algorithm_concept_for_coding_project.png";
@@ -14,7 +15,8 @@ export function Projects() {
       tags: ["React.js", "Node.js", "MongoDB", "Razorpay"],
       image: medicareImg,
       link: "#",
-      github: "#"
+      github: "#",
+      color: "from-cyan-500/20 to-blue-600/20"
     },
     {
       title: "AlgoUniversity Judge",
@@ -22,7 +24,8 @@ export function Projects() {
       tags: ["MERN", "Docker", "AWS", "LLM"],
       image: algoImg,
       link: "#",
-      github: "#"
+      github: "#",
+      color: "from-purple-500/20 to-pink-600/20"
     },
     {
       title: "Wanderworld",
@@ -30,70 +33,76 @@ export function Projects() {
       tags: ["EJS", "Express", "MongoDB", "Cloudinary"],
       image: wanderImg,
       link: "#",
-      github: "#"
+      github: "#",
+      color: "from-orange-500/20 to-amber-600/20"
     }
   ];
 
   return (
-    <section id="projects" className="py-24 bg-black/20">
+    <section id="projects" className="py-32 relative">
       <div className="container mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 text-center max-w-2xl mx-auto"
+          className="mb-20 text-center max-w-3xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Featured <span className="text-gradient">Projects</span></h2>
-          <p className="text-muted-foreground">A selection of my recent work, ranging from full-stack applications to complex algorithmic solutions.</p>
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Featured <span className="text-gradient">Projects</span></h2>
+          <p className="text-muted-foreground text-lg">A selection of my recent work, ranging from full-stack applications to complex algorithmic solutions.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
+              className="h-full"
             >
-              <Card className="group overflow-hidden bg-card/40 backdrop-blur-sm border-white/10 hover:border-primary/50 transition-all duration-500 h-full flex flex-col">
-                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/10 p-8 flex items-center justify-center">
-                  <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]" />
-                  <motion.img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-32 h-32 object-contain drop-shadow-2xl z-10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
-                  />
-                </div>
-                
-                <CardContent className="p-6 flex-grow">
-                  <h3 className="text-2xl font-bold mb-3 font-heading group-hover:text-primary transition-colors">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                    {project.desc}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-muted-foreground">
-                        {tag}
-                      </span>
-                    ))}
+              <TiltCard className="perspective-1000">
+                <Card className="group overflow-hidden bg-card/40 backdrop-blur-sm border-white/10 hover:border-primary/50 transition-all duration-500 h-full flex flex-col shadow-2xl shadow-black/40">
+                  <div className={`relative h-56 overflow-hidden bg-gradient-to-br ${project.color} p-8 flex items-center justify-center`}>
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+                    <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.5))]" />
+                    
+                    <motion.img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-40 h-40 object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6 group-hover:-translate-y-2"
+                      style={{ transformStyle: "preserve-3d", transform: "translateZ(50px)" }}
+                    />
                   </div>
-                </CardContent>
+                  
+                  <CardContent className="p-8 flex-grow relative z-20 bg-card/60">
+                    <h3 className="text-2xl font-bold mb-3 font-heading group-hover:text-primary transition-colors tracking-tight">{project.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                      {project.desc}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {project.tags.map(tag => (
+                        <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-muted-foreground group-hover:border-primary/30 group-hover:text-primary/80 transition-colors">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
 
-                <CardFooter className="p-6 pt-0 flex gap-4">
-                  <Button size="sm" variant="outline" className="flex-1 border-white/10 hover:bg-primary hover:text-white hover:border-primary transition-all" asChild>
-                    <a href={project.github}>
-                      <Github className="w-4 h-4 mr-2" /> Code
-                    </a>
-                  </Button>
-                  <Button size="sm" className="flex-1 bg-white/10 hover:bg-white/20 text-foreground" asChild>
-                    <a href={project.link}>
-                      <ExternalLink className="w-4 h-4 mr-2" /> Demo
-                    </a>
-                  </Button>
-                </CardFooter>
-              </Card>
+                  <CardFooter className="p-8 pt-0 flex gap-4 bg-card/60">
+                    <Button size="sm" variant="outline" className="flex-1 border-white/10 hover:bg-primary hover:text-white hover:border-primary transition-all rounded-lg h-10" asChild>
+                      <a href={project.github}>
+                        <Github className="w-4 h-4 mr-2" /> Code
+                      </a>
+                    </Button>
+                    <Button size="sm" className="flex-1 bg-white/10 hover:bg-white/20 text-white rounded-lg h-10" asChild>
+                      <a href={project.link}>
+                        <ExternalLink className="w-4 h-4 mr-2" /> Demo
+                      </a>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </TiltCard>
             </motion.div>
           ))}
         </div>
