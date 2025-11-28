@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Menu, X, FileText, User, Code, Briefcase, GraduationCap, Trophy, Sun, Moon } from "lucide-react";
+import { Menu, X, FileText, User, Code, Briefcase, GraduationCap, Trophy, Sun, Moon, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "next-themes";
