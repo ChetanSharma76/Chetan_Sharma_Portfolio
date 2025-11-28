@@ -185,10 +185,10 @@ export function Hero() {
                     <img 
                       src="/profile-photo.png" 
                       alt="Chetan Sharma" 
-                      className="w-full h-full object-contain bg-gradient-to-b from-transparent to-black/20"
+                      className="w-full h-full object-cover bg-gradient-to-b from-transparent to-black/20 brightness-125"
                       data-testid="img-hero-profile"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                   </div>
                </div>
             </motion.div>
