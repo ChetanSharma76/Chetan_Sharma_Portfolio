@@ -1,81 +1,30 @@
 import { motion } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
-import { Html, useProgress, Float } from "@react-three/drei";
-import { Suspense } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Calendar, School } from "lucide-react";
+import { GraduationCap, School, Award, BookOpen } from "lucide-react";
 
-function Loader() {
-  const { progress } = useProgress();
-  return <Html center>{progress.toFixed(1)} % loaded</Html>;
-}
-
-interface AcademicCardProps {
+interface AcademicItem {
   title: string;
   institution: string;
   year: string;
   score: string;
   details: string;
-  position: [number, number, number];
-  delay: number;
-}
-
-function AcademicCard3D({ title, institution, year, score, details, position, delay }: AcademicCardProps) {
-  return (
-    <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5} floatingRange={[-0.1, 0.1]}>
-      <Html transform position={position} distanceFactor={1.5}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 50 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: delay, duration: 0.6 }}
-          className="w-[420px]"
-        >
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
-            <div className="relative bg-card border border-border p-6 rounded-2xl shadow-xl backdrop-blur-xl h-full">
-              <div className="absolute -top-6 left-6 w-12 h-12 bg-background border border-border rounded-xl flex items-center justify-center shadow-lg transform -rotate-12 group-hover:rotate-0 transition-transform duration-300">
-                <GraduationCap className="w-6 h-6 text-primary" />
-              </div>
-              
-              <div className="mt-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-foreground">{title}</h3>
-                  <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">{year}</Badge>
-                </div>
-                
-                <div className="flex items-center gap-2 text-muted-foreground mb-4 text-sm">
-                  <School className="w-4 h-4" />
-                  {institution}
-                </div>
-
-                <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-4 mb-4 border border-primary/20">
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider mb-2 font-semibold">Performance</div>
-                  <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{score}</div>
-                </div>
-
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                  {details}
-                </p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </Html>
-    </Float>
-  );
+  icon: React.ReactNode;
+  hoverColor: string;
+  accentGradient: string;
 }
 
 export function Academics() {
-  const academics = [
+  const academics: AcademicItem[] = [
     {
       title: "B.Tech in EEE",
       institution: "Indian Institute of Technology (IIT) Patna",
       year: "2022 - 2026",
       score: "CPI: 8.58",
       details: "Currently pursuing Bachelor of Technology. Hold 6th position in the department.",
-      position: [-2.2, 0, 0]
+      icon: <BookOpen className="w-8 h-8" />,
+      hoverColor: "group-hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]",
+      accentGradient: "from-cyan-500/20 to-blue-500/20"
     },
     {
       title: "Senior Secondary (12th)",
@@ -83,7 +32,9 @@ export function Academics() {
       year: "2022",
       score: "94.2%",
       details: "CBSE Board. Secured admission into IIT by qualifying JEE Mains & Advanced.",
-      position: [0, 0.2, 0]
+      icon: <Award className="w-8 h-8" />,
+      hoverColor: "group-hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]",
+      accentGradient: "from-purple-500/20 to-pink-500/20"
     },
     {
       title: "Secondary (10th)",
@@ -91,78 +42,123 @@ export function Academics() {
       year: "2020",
       score: "96.4%",
       details: "CBSE Board. Consistently maintained academic excellence.",
-      position: [2.2, 0, 0]
+      icon: <GraduationCap className="w-8 h-8" />,
+      hoverColor: "group-hover:shadow-[0_0_30px_rgba(34,197,94,0.3)]",
+      accentGradient: "from-green-500/20 to-emerald-500/20"
     }
   ];
 
   return (
-    <section id="academics" className="py-32 relative overflow-hidden">
-       <div className="container mx-auto px-6 relative z-10">
+    <section id="academics" className="py-24 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-10 text-center"
+          className="mb-16 text-center"
         >
-          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Academic <span className="text-gradient">Journey</span></h2>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+            Academic <span className="text-gradient">Journey</span>
+          </h2>
+          <div className="h-1.5 w-32 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
+          <p className="text-muted-foreground mt-6 max-w-2xl mx-auto text-lg">
+            A chronicle of academic achievements and milestones that shaped my educational path
+          </p>
         </motion.div>
 
-        <div className="flex flex-col gap-8 mt-10 w-full">
-           {academics.map((item, i) => (
-             <motion.div 
-               key={i}
-               initial={{ opacity: 0, y: 20 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               transition={{ delay: i * 0.2 }}
-               className="w-full"
-             >
-                <div className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
-                  <Card className="bg-card border border-border p-8 backdrop-blur-xl relative overflow-hidden">
-                     <div className="absolute -top-6 left-6 w-12 h-12 bg-background border border-border rounded-xl flex items-center justify-center shadow-lg transform -rotate-12 group-hover:rotate-0 transition-transform duration-300">
-                       <GraduationCap className="w-6 h-6 text-primary" />
-                     </div>
-                     <div className="relative z-10 mt-4">
-                       <div className="flex justify-between items-start mb-3">
-                         <h3 className="text-2xl font-bold text-foreground">{item.title}</h3>
-                         <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">{item.year}</Badge>
-                       </div>
-                       <div className="flex items-center gap-2 text-muted-foreground mb-5 text-sm">
-                         <School className="w-4 h-4" />
-                         {item.institution}
-                       </div>
-                       <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-4 mb-5 border border-primary/20">
-                         <div className="text-xs text-muted-foreground uppercase tracking-wider mb-2 font-semibold">Performance</div>
-                         <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{item.score}</div>
-                       </div>
-                       <p className="text-base text-muted-foreground leading-relaxed">{item.details}</p>
-                     </div>
-                  </Card>
-                </div>
-             </motion.div>
-           ))}
+        {/* Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+          {academics.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="h-full"
+            >
+              <div className={`relative group h-full ${item.hoverColor} transition-all duration-500`}>
+                {/* Gradient Border Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-20 group-hover:opacity-60 transition-all duration-500"></div>
+                
+                {/* Card */}
+                <Card className="relative bg-card/80 backdrop-blur-xl border border-border/50 p-8 h-full flex flex-col overflow-hidden group-hover:bg-card/95 group-hover:border-primary/50 transition-all duration-500">
+                  {/* Background Accent */}
+                  <div className={`absolute -top-12 -right-12 w-40 h-40 bg-gradient-to-br ${item.accentGradient} rounded-full opacity-0 group-hover:opacity-40 transition-opacity duration-500 blur-2xl`}></div>
+                  
+                  {/* Icon Badge */}
+                  <motion.div
+                    className="relative z-10 mb-6 inline-flex"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-500 border border-primary/20 group-hover:border-primary/40">
+                      {item.icon}
+                    </div>
+                  </motion.div>
+
+                  {/* Title and Year */}
+                  <div className="relative z-10 mb-4">
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <Badge 
+                      variant="outline" 
+                      className="bg-primary/10 text-primary border-primary/30 group-hover:bg-primary/20 group-hover:border-primary/60 transition-all duration-300"
+                    >
+                      {item.year}
+                    </Badge>
+                  </div>
+
+                  {/* Institution */}
+                  <div className="relative z-10 mb-5 pb-5 border-b border-border/50 group-hover:border-primary/30 transition-colors duration-300">
+                    <div className="flex items-center gap-2">
+                      <School className="w-4 h-4 text-primary/70 group-hover:text-primary transition-colors duration-300" />
+                      <p className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300 font-medium">
+                        {item.institution}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Performance Score */}
+                  <div className="relative z-10 mb-6 p-4 rounded-lg bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 group-hover:from-primary/15 group-hover:to-accent/15 group-hover:border-primary/40 transition-all duration-500">
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider mb-2 font-bold">Performance</div>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent group-hover:from-accent group-hover:to-primary transition-all duration-500">
+                      {item.score}
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <div className="relative z-10 flex-grow">
+                    <p className="text-base text-muted-foreground leading-relaxed group-hover:text-foreground/90 transition-colors duration-300">
+                      {item.details}
+                    </p>
+                  </div>
+
+                  {/* Bottom Accent Line */}
+                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-500"></div>
+                </Card>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="hidden lg:block h-[500px] w-full">
-          <Canvas camera={{ position: [0, 0, 6], fov: 40 }}>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} />
-            <Suspense fallback={<Loader />}>
-              <group position={[0, 0, 0]}>
-                {academics.map((item, index) => (
-                  // @ts-ignore
-                  <AcademicCard3D 
-                    key={index}
-                    {...item}
-                    position={item.position as [number, number, number]}
-                    delay={index * 0.2}
-                  />
-                ))}
-              </group>
-            </Suspense>
-          </Canvas>
-        </div>
+        {/* Timeline Connector */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-16 text-center"
+        >
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background/50 border border-border/50 backdrop-blur">
+            <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            <span className="text-sm text-muted-foreground">Continuous Learning & Growth</span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
