@@ -18,13 +18,12 @@ export function Nav() {
   }, []);
 
   const navLinks = [
-    { name: "Hero Section", href: "#about", icon: User },
     { name: "Education", href: "#academics", icon: GraduationCap },
     { name: "Skills", href: "#skills", icon: Code },
     { name: "Projects", href: "#projects", icon: Briefcase },
     { name: "Experience", href: "#experience", icon: Briefcase },
     { name: "Achievements", href: "#achievements", icon: Trophy },
-    { name: "Contact Us", href: "#contact", icon: Mail },
+    { name: "Contact Me", href: "#contact", icon: Mail },
   ];
 
   return (
