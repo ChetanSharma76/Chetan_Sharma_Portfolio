@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, School, Award, BookOpen } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 
 interface AcademicItem {
   title: string;
@@ -9,9 +9,8 @@ interface AcademicItem {
   year: string;
   score: string;
   details: string;
-  icon: React.ReactNode;
+  subjects: string[];
   hoverColor: string;
-  accentGradient: string;
 }
 
 export function Academics() {
@@ -22,9 +21,8 @@ export function Academics() {
       year: "2022 - 2026",
       score: "CPI: 8.58",
       details: "Currently pursuing Bachelor of Technology. Hold 6th position in the department.",
-      icon: <BookOpen className="w-8 h-8" />,
-      hoverColor: "group-hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]",
-      accentGradient: "from-cyan-500/20 to-blue-500/20"
+      subjects: ["Electrical and Electronics Engineering"],
+      hoverColor: "group-hover:shadow-[0_0_20px_rgba(6,182,212,0.2)]"
     },
     {
       title: "Senior Secondary (12th)",
@@ -32,9 +30,8 @@ export function Academics() {
       year: "2022",
       score: "94.2%",
       details: "CBSE Board. Secured admission into IIT by qualifying JEE Mains & Advanced.",
-      icon: <Award className="w-8 h-8" />,
-      hoverColor: "group-hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]",
-      accentGradient: "from-purple-500/20 to-pink-500/20"
+      subjects: ["Physics", "Chemistry", "Maths", "Computer Science"],
+      hoverColor: "group-hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
     },
     {
       title: "Secondary (10th)",
@@ -42,123 +39,103 @@ export function Academics() {
       year: "2020",
       score: "96.4%",
       details: "CBSE Board. Consistently maintained academic excellence.",
-      icon: <GraduationCap className="w-8 h-8" />,
-      hoverColor: "group-hover:shadow-[0_0_30px_rgba(34,197,94,0.3)]",
-      accentGradient: "from-green-500/20 to-emerald-500/20"
+      subjects: ["Science", "Maths", "Computer Science"],
+      hoverColor: "group-hover:shadow-[0_0_20px_rgba(34,197,94,0.2)]"
     }
   ];
 
   return (
-    <section id="academics" className="py-24 relative overflow-hidden">
+    <section id="academics" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 text-center"
+          className="mb-12 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
             Academic <span className="text-gradient">Journey</span>
           </h2>
-          <div className="h-1.5 w-32 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
-          <p className="text-muted-foreground mt-6 max-w-2xl mx-auto text-lg">
-            A chronicle of academic achievements and milestones that shaped my educational path
-          </p>
+          <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {academics.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
               className="h-full"
             >
               <div className={`relative group h-full ${item.hoverColor} transition-all duration-500`}>
                 {/* Gradient Border Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-20 group-hover:opacity-60 transition-all duration-500"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-15 group-hover:opacity-40 transition-all duration-500"></div>
                 
                 {/* Card */}
-                <Card className="relative bg-card/80 backdrop-blur-xl border border-border/50 p-8 h-full flex flex-col overflow-hidden group-hover:bg-card/95 group-hover:border-primary/50 transition-all duration-500">
-                  {/* Background Accent */}
-                  <div className={`absolute -top-12 -right-12 w-40 h-40 bg-gradient-to-br ${item.accentGradient} rounded-full opacity-0 group-hover:opacity-40 transition-opacity duration-500 blur-2xl`}></div>
-                  
-                  {/* Icon Badge */}
-                  <motion.div
-                    className="relative z-10 mb-6 inline-flex"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="p-4 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-500 border border-primary/20 group-hover:border-primary/40">
-                      {item.icon}
+                <Card className="relative bg-card/50 backdrop-blur border border-border/40 p-6 h-full flex flex-col overflow-hidden group-hover:bg-card/70 group-hover:border-primary/40 transition-all duration-500">
+                  {/* Icon */}
+                  <div className="relative z-10 mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                      <GraduationCap className="w-5 h-5" />
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* Title and Year */}
-                  <div className="relative z-10 mb-4">
-                    <div className="flex items-start justify-between gap-3 mb-2">
-                      <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                  <div className="relative z-10 mb-3">
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
                         {item.title}
                       </h3>
                     </div>
                     <Badge 
                       variant="outline" 
-                      className="bg-primary/10 text-primary border-primary/30 group-hover:bg-primary/20 group-hover:border-primary/60 transition-all duration-300"
+                      className="text-xs bg-primary/5 text-primary border-primary/20 group-hover:bg-primary/15 group-hover:border-primary/40 transition-all duration-300"
                     >
                       {item.year}
                     </Badge>
                   </div>
 
                   {/* Institution */}
-                  <div className="relative z-10 mb-5 pb-5 border-b border-border/50 group-hover:border-primary/30 transition-colors duration-300">
-                    <div className="flex items-center gap-2">
-                      <School className="w-4 h-4 text-primary/70 group-hover:text-primary transition-colors duration-300" />
-                      <p className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300 font-medium">
-                        {item.institution}
-                      </p>
-                    </div>
+                  <div className="relative z-10 mb-3">
+                    <p className="text-sm text-muted-foreground group-hover:text-foreground/70 transition-colors duration-300">
+                      {item.institution}
+                    </p>
                   </div>
 
                   {/* Performance Score */}
-                  <div className="relative z-10 mb-6 p-4 rounded-lg bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 group-hover:from-primary/15 group-hover:to-accent/15 group-hover:border-primary/40 transition-all duration-500">
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider mb-2 font-bold">Performance</div>
-                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent group-hover:from-accent group-hover:to-primary transition-all duration-500">
+                  <div className="relative z-10 mb-4 p-3 rounded-lg bg-primary/5 border border-primary/10 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all duration-500">
+                    <div className="text-xs text-muted-foreground font-medium mb-1">Performance</div>
+                    <div className="text-xl font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                       {item.score}
                     </div>
                   </div>
 
-                  {/* Description */}
+                  {/* Subjects/Details */}
                   <div className="relative z-10 flex-grow">
-                    <p className="text-base text-muted-foreground leading-relaxed group-hover:text-foreground/90 transition-colors duration-300">
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                       {item.details}
                     </p>
+                    <div className="flex flex-wrap gap-1">
+                      {item.subjects.map((subject, idx) => (
+                        <Badge 
+                          key={idx}
+                          variant="secondary"
+                          className="text-xs bg-accent/10 text-accent border-0 group-hover:bg-accent/20 transition-colors duration-300"
+                        >
+                          {subject}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-
-                  {/* Bottom Accent Line */}
-                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-500"></div>
                 </Card>
               </div>
             </motion.div>
           ))}
         </div>
-
-        {/* Timeline Connector */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background/50 border border-border/50 backdrop-blur">
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-            <span className="text-sm text-muted-foreground">Continuous Learning & Growth</span>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
