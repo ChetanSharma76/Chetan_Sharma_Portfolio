@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { TiltCard } from "@/components/ui/tilt-card";
-import { SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiReact, SiNodedotjs, SiExpress, SiMongodb, SiMysql, SiDocker, SiAmazon, SiBootstrap, SiTailwindcss, SiEjs, SiGithub, SiGit, SiVisualstudio, SiSublimetext, SiPostman } from "react-icons/si";
+import { SiCplusplus, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiReact, SiNodedotjs, SiExpress, SiMongodb, SiMysql, SiDocker, SiAmazon, SiBootstrap, SiTailwindcss, SiEjs, SiGithub, SiGit, SiSublimetext, SiPostman } from "react-icons/si";
+import { VscCode } from "react-icons/vsc";
 import { TbApi } from "react-icons/tb";
 
 export function Skills() {
@@ -46,7 +47,7 @@ export function Skills() {
       skills: [
         { name: "GitHub", icon: SiGithub, color: "currentColor" },
         { name: "Git", icon: SiGit, color: "#F1502F" },
-        { name: "VS Code", icon: SiVisualstudio, color: "#007ACC" },
+        { name: "VS Code", icon: VscCode, color: "#007ACC" },
         { name: "Sublime", icon: SiSublimetext, color: "#FF9900" },
         { name: "Postman", icon: SiPostman, color: "#FF6C37" },
       ]

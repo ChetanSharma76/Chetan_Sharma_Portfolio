@@ -1,16 +1,6 @@
 import { motion } from "framer-motion";
-import { SiLeetcode, SiCodechef } from "react-icons/si";
+import { SiLeetcode, SiCodechef, SiCodeforces } from "react-icons/si";
 import { TiltCard } from "@/components/ui/tilt-card";
-
-function CodeforcesBarsIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
-      <rect x="2" y="4" width="4" height="16" fill="#FF0000" />
-      <rect x="10" y="4" width="4" height="16" fill="#00A86B" />
-      <rect x="18" y="4" width="4" height="16" fill="#0066FF" />
-    </svg>
-  );
-}
 
 export function Achievements() {
   const platforms = [
@@ -36,14 +26,13 @@ export function Achievements() {
     },
     {
       name: "Codeforces",
-      icon: CodeforcesBarsIcon,
+      icon: SiCodeforces,
       rating: "1395",
       rank: "Pupil",
       solved: "300+",
       desc: "Maintained a 160+ day coding streak.",
       color: "#1F8ACB",
-      link: "https://codeforces.com/",
-      isCustom: true
+      link: "https://codeforces.com/"
     }
   ];
 
@@ -78,11 +67,7 @@ export function Achievements() {
                     
                     <div className="flex flex-col items-center text-center relative z-10">
                       <div className="p-4 rounded-2xl bg-background/50 mb-6 border border-border group-hover:border-primary/20 transition-colors shadow-lg">
-                        {platform.isCustom ? (
-                          <platform.icon />
-                        ) : (
-                          <platform.icon className="w-12 h-12" style={{ color: platform.color }} />
-                        )}
+                        <platform.icon className="w-12 h-12" style={{ color: platform.color }} />
                       </div>
                       
                       <h3 className="text-2xl font-bold mb-2 font-heading text-foreground">{platform.name}</h3>
