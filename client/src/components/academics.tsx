@@ -19,7 +19,7 @@ export function Academics() {
       institution: "Indian Institute of Technology (IIT) Patna",
       year: "2022 - 2026",
       score: "CPI: 8.58",
-      details: "Currently pursuing Bachelor of Technology. Hold 6th position in the department.",
+      details: "Pursuing Electrical and Electronics Engineering with focus on full-stack development and competitive programming.",
       subjects: ["Electrical and Electronics Engineering"]
     },
     {
@@ -27,7 +27,7 @@ export function Academics() {
       institution: "M.P.S.M. Grace Convent Sr. Sec. School",
       year: "2022",
       score: "94.2%",
-      details: "CBSE Board. Secured admission into IIT by qualifying JEE Mains & Advanced.",
+      details: "Scored 94.2% with distinction in Science stream.",
       subjects: ["Physics", "Chemistry", "Maths", "Computer Science"]
     },
     {
@@ -35,7 +35,7 @@ export function Academics() {
       institution: "M.P.S.M. Grace Convent Sr. Sec. School",
       year: "2020",
       score: "96.4%",
-      details: "CBSE Board. Consistently maintained academic excellence.",
+      details: "Achieved 96.4% with outstanding performance across all subjects.",
       subjects: ["Science", "Maths", "Computer Science"]
     }
   ];
@@ -127,9 +127,6 @@ export function Academics() {
 
                   {/* Description */}
                   <div className="relative z-10 flex-grow">
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {item.details}
-                    </p>
                   </div>
                 </Card>
               </div>
