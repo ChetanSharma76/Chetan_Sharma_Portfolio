@@ -8,31 +8,31 @@ export function Achievements() {
       name: "LeetCode",
       icon: SiLeetcode,
       rating: "1875",
-      rank: "Knight Badge",
-      solved: "500+",
+      rank: "Knight",
+      solved: "650+",
       desc: "Ranked 975/25,000+ in Weekly Contest 422.",
       color: "#FFA116",
-      link: "https://leetcode.com/"
-    },
-    {
-      name: "CodeChef",
-      icon: SiCodechef,
-      rating: "1736",
-      rank: "3-Star",
-      solved: "250+",
-      desc: "Top 5% in Starters 152.",
-      color: "#5B4638",
-      link: "https://www.codechef.com/"
+      link: "https://leetcode.com/u/ChetanSharma1/"
     },
     {
       name: "Codeforces",
       icon: SiCodeforces,
       rating: "1395",
       rank: "Pupil",
-      solved: "300+",
+      solved: "800+",
       desc: "Maintained a 160+ day coding streak.",
       color: "#1F8ACB",
-      link: "https://codeforces.com/"
+      link: "https://codeforces.com/profile/chetansharma7777"
+    },
+    {
+      name: "CodeChef",
+      icon: SiCodechef,
+      rating: "1736",
+      rank: "3-Star",
+      solved: "100+",
+      desc: "Top 5% in Starters 152.",
+      color: "#5B4638",
+      link: "https://www.codechef.com/users/chetansharma07"
     }
   ];
 

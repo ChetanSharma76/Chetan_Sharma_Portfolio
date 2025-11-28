@@ -38,13 +38,19 @@ export function Nav() {
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-6 flex items-center justify-center relative">
-        {/* Logo - Fixed on Left */}
-        <div className="absolute left-6">
-          <a href="#" className="relative group">
+        {/* Logo & Photo - Fixed on Left */}
+        <div className="absolute left-6 flex items-center gap-3">
+          <a href="#" className="relative group flex items-center gap-3">
+            <img 
+              src="/profile-photo.png" 
+              alt="Chetan Sharma" 
+              className="w-10 h-10 rounded-full object-cover border-2 border-primary/30 group-hover:border-primary transition-colors"
+              data-testid="img-nav-profile"
+            />
             <span className="text-2xl font-heading font-bold tracking-tighter text-foreground group-hover:text-primary transition-colors">
               CS<span className="text-primary">.</span>
             </span>
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+            <span className="absolute -bottom-1 left-12 w-0 h-0.5 bg-primary transition-all group-hover:w-12" />
           </a>
         </div>
 

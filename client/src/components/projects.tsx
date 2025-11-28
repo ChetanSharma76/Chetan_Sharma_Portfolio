@@ -11,7 +11,7 @@ export function Projects() {
   const projects = [
     {
       title: "OptiCode",
-      desc: "Comprehensive online judge platform with AI-powered code review system. reduced security vulnerabilities by 95% using Docker sandboxing.",
+      desc: "Comprehensive online judge platform with AI-powered code review system, making the application secure by docker containerization .",
       tags: ["MERN", "Docker", "AWS", "LLM"],
       image: algoImg,
       link: "https://opticodeoj.vercel.app/",
