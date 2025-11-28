@@ -19,6 +19,7 @@ export function Academics() {
       institution: "Indian Institute of Technology (IIT) Patna",
       year: "2022 - 2026",
       score: "CPI: 8.58",
+      details: "Electrical and Electronics Engineering",
       subjects: ["Electrical and Electronics Engineering"]
     },
     {
@@ -26,6 +27,7 @@ export function Academics() {
       institution: "M.P.S.M. Grace Convent Sr. Sec. School",
       year: "2022",
       score: "94.2%",
+      details: "Science Stream",
       subjects: ["Physics", "Chemistry", "Maths"]
     },
     {
@@ -33,6 +35,7 @@ export function Academics() {
       institution: "M.P.S.M. Grace Convent Sr. Sec. School",
       year: "2020",
       score: "94.4%",
+      details: "Science Stream",
       subjects: ["Science", "Maths", "Computer Science"]
     }
   ];
