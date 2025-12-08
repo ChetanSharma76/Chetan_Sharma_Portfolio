@@ -29,8 +29,14 @@ export default function Home() {
         </main>
         
         <footer className="py-8 border-t border-white/10 bg-black/20 text-center text-muted-foreground text-sm">
-          <p>© {new Date().getFullYear()} Chetan Sharma. Built with React, Three.js & Tailwind.</p>
+          <p>
+            © {new Date().getFullYear()} • Built with{" "}
+            <span className="text-red-500 animate-pulse inline-block">❤️</span> by
+            <span className="font-semibold text-white/80"> Chetan Sharma</span>.
+          </p>
         </footer>
+
+
       </div>
     </div>
   );

@@ -70,7 +70,7 @@ export function Projects() {
                     <motion.img 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-full object-cover drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6 group-hover:-translate-y-2"
+                      className="w-full h-full absolute top-0 left-0 group-hover:scale-105 transition-transform duration-500"
                       style={{ transformStyle: "preserve-3d", transform: "translateZ(50px)" }}
                     />
                   </div>

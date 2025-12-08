@@ -66,12 +66,25 @@ function Hero3DElement() {
   );
 }
 
-const TypewriterText = ({ texts }: { texts: string[] }) => {
+type TypewriterProps = {
+  texts: string[];
+  speed?: number;        // typing speed
+  deleteSpeed?: number; // deleting speed
+  pauseTime?: number;   // pause after word completes
+};
+
+const TypewriterText = ({
+  texts,
+  speed = 20,          // ✅ FAST default typing
+  deleteSpeed = 20,    // ✅ FAST delete
+  pauseTime = 100,     // ✅ short pause
+}: TypewriterProps) => {
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [reverse, setReverse] = useState(false);
   const [blink, setBlink] = useState(true);
 
+  // Cursor Blink
   useEffect(() => {
     const timeout2 = setInterval(() => {
       setBlink((prev) => !prev);
@@ -79,26 +92,36 @@ const TypewriterText = ({ texts }: { texts: string[] }) => {
     return () => clearInterval(timeout2);
   }, []);
 
+  // Typing Logic
   useEffect(() => {
-    if (subIndex === texts[index].length + 1 && !reverse) {
-      setReverse(true);
+    // When word is fully typed → pause then start deleting
+    if (subIndex === texts[index].length && !reverse) {
+      setTimeout(() => setReverse(true), pauseTime);
       return;
     }
+
+    // When word is fully deleted → move to next word
     if (subIndex === 0 && reverse) {
       setReverse(false);
       setIndex((prev) => (prev + 1) % texts.length);
       return;
     }
+
     const timeout = setTimeout(() => {
       setSubIndex((prev) => prev + (reverse ? -1 : 1));
-    }, Math.max(reverse ? 75 : subIndex === texts[index].length ? 1000 : 150, Math.random() * 350));
+    }, reverse ? deleteSpeed : speed);
+
     return () => clearTimeout(timeout);
-  }, [subIndex, index, reverse, texts]);
+  }, [subIndex, index, reverse, texts, speed, deleteSpeed, pauseTime]);
 
   return (
     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
       {texts[index].substring(0, subIndex)}
-      <span className={`text-primary ml-1 ${blink ? "opacity-100" : "opacity-0"}`}>|</span>
+      <span
+        className={`text-primary ml-1 ${blink ? "opacity-100" : "opacity-0"}`}
+      >
+        |
+      </span>
     </span>
   );
 };
@@ -118,7 +141,7 @@ export function Hero() {
             <h1 className="text-5xl md:text-7xl font-heading font-bold leading-[1.1] mb-6 text-foreground">
               Hi, I'm Chetan <br />
               <span className="text-4xl md:text-5xl block mt-2">
-                <TypewriterText texts={["Software Engineer", "Developer", "Problem Solver", "Tech Enthusiast"]} />
+                <TypewriterText texts={["Software Engineer", "Developer", "Problem Solver", "Tech Enthusiast"] } />
               </span>
             </h1>
 
@@ -134,7 +157,7 @@ export function Hero() {
             </div>
 
             <div className="flex flex-wrap gap-5">
-              <Button size="lg" className="h-14 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-medium text-lg transition-all hover:scale-105 shadow-lg shadow-primary/25">
+              <Button size="lg" className="h-14 rounded-full bg-primary cursor-pointer text-primary-foreground hover:bg-primary/90 px-8 font-medium text-lg transition-all hover:scale-105 shadow-lg shadow-primary/25">
                 View Projects <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               
@@ -173,15 +196,20 @@ export function Hero() {
               initial={{ opacity: 0, scale: 0.8, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="absolute bottom-1/3 right-0 md:right-10 z-10 hidden lg:block"
+              className="
+                absolute bottom-50 
+                left-1/2 -translate-x-1/2     
+                sm:left-auto sm:right-5 sm:translate-x-0 
+                md:right-10 
+                z-10"
             >
                <div className="relative group">
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
                   <div className="relative w-[220px] h-[280px] rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20 bg-card/40 backdrop-blur-sm transform rotate-[-5deg] hover:rotate-0 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40">
                     <img 
-                      src="/profile-photo.png" 
+                      src="/profile-photo-3.png" 
                       alt="Chetan Sharma" 
-                      className="w-full h-full object-cover bg-gradient-to-b from-transparent to-black/20 brightness-110"
+                      className="w-full h-full object-cover bg-gradient-to-b from-transparent to-black/10 brightness-110"
                       data-testid="img-hero-profile"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />

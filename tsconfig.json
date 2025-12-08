@@ -5,16 +5,23 @@
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
     "noEmit": true,
+
+    // --- IMPORTANT FIX ---
+    "moduleResolution": "bundler",    // ❗ fixes express, req, res typings
     "module": "ESNext",
+
     "strict": true,
     "lib": ["esnext", "dom", "dom.iterable"],
     "jsx": "preserve",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+
+    // --- Add Express + Node types ---
+    "types": ["node", "vite/client", "express"],
+
     "baseUrl": ".",
-    "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["./client/src/*"],
       "@shared/*": ["./shared/*"]
