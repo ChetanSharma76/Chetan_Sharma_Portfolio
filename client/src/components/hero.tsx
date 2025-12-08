@@ -75,9 +75,9 @@ type TypewriterProps = {
 
 const TypewriterText = ({
   texts,
-  speed = 20,          // ✅ FAST default typing
-  deleteSpeed = 20,    // ✅ FAST delete
-  pauseTime = 100,     // ✅ short pause
+  speed = 40,          // ✅ FAST default typing
+  deleteSpeed = 30,    // ✅ FAST delete
+  pauseTime = 400,     // ✅ short pause
 }: TypewriterProps) => {
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
