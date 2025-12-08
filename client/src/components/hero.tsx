@@ -75,7 +75,7 @@ type TypewriterProps = {
 
 const TypewriterText = ({
   texts,
-  speed = 40,          // ✅ FAST default typing
+  speed = 60,          // ✅ FAST default typing
   deleteSpeed = 40,    // ✅ FAST delete
   pauseTime = 800,     // ✅ short pause
 }: TypewriterProps) => {
