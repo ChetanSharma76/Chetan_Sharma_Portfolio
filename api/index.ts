@@ -1,11 +1,12 @@
 import setupApp from '../server/index';
+// @ts-ignore
 import type { IncomingMessage, ServerResponse } from 'http';
 
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
-  // 1. Ensure the app is initialized (routes are registered)
+  // Initialize the app cleanly for every serverless request
   const app = await setupApp();
   
-  // 2. Hand over the request to Express
+  // Pass the request to Express
   // @ts-ignore
   app(req, res);
 }

@@ -6,18 +6,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Global variable to hold the initialized app so we don't rebuild it on every request
-let appInitialized = false;
-
+// 1. Define the setup function (Lazy Loading)
 async function setupApp() {
-  if (appInitialized) return app;
-
   const httpServer = createServer(app);
 
-  // 1. Register API Routes
+  // Register API Routes
   await registerRoutes(httpServer, app);
 
-  // 2. Setup Error Handling
+  // Error Handling
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -25,26 +21,32 @@ async function setupApp() {
     throw err;
   });
 
-  // 3. Setup Vite (ONLY in Development)
+  // Setup Vite (ONLY IN LOCAL DEV)
+  // Vercel will ignore this block completely
   if (process.env.NODE_ENV !== "production") {
-    const { setupVite } = await import("./vite");
-    await setupVite(httpServer, app);
+    try {
+      const { setupVite } = await import("./vite");
+      await setupVite(httpServer, app);
+    } catch (err) {
+      console.error("Failed to load Vite (this is fine in production):", err);
+    }
   }
 
-  appInitialized = true;
   return app;
 }
 
-// Start Server (Only if running locally)
+// 2. Start the Listener (ONLY IN LOCAL DEV)
+// This block will NEVER run on Vercel because NODE_ENV is "production"
 if (process.env.NODE_ENV !== "production") {
-  setupApp().then((appInstance) => {
+  (async () => {
+    const appInstance = await setupApp();
     const PORT = process.env.PORT || 5000;
-    const httpServer = createServer(appInstance); // Re-create server wrapper for local
+    const httpServer = createServer(appInstance);
     httpServer.listen(PORT, () => {
       console.log(`🚀 Server running locally on http://localhost:${PORT}`);
     });
-  });
+  })();
 }
 
-// Export the SETUP function, not the app directly
+// 3. Export the setup function for Vercel
 export default setupApp;
