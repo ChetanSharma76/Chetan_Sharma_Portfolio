@@ -1,17 +1,20 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite"; // <--- REQUIRED FOR V4
+import tailwindcss from "@tailwindcss/vite";
 import path from "path";
+import { fileURLToPath } from "url"; // <--- Import this
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { metaImagesPlugin } from "./vite-plugin-meta-images";
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+// FIX: Windows-safe way to get __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [
     react(),
     runtimeErrorOverlay(),
-    tailwindcss(), // <--- REQUIRED FOR V4
+    tailwindcss(),
     metaImagesPlugin(),
   ],
   resolve: {
