@@ -4,11 +4,11 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-  "dev": "cross-env NODE_ENV=development tsx watch server/index.ts",
-  "build": "vite build",
-  "check": "tsc",
-  "db:push": "drizzle-kit push"
-},
+    "dev": "cross-env NODE_ENV=development tsx watch server/index.ts",
+    "build": "vite build",
+    "check": "tsc",
+    "db:push": "drizzle-kit push"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@jridgewell/trace-mapping": "^0.3.25",
@@ -46,6 +46,8 @@
     "@types/nodemailer": "^7.0.4",
     "@types/three": "^0.181.0",
     "@vercel/node": "^5.5.15",
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",

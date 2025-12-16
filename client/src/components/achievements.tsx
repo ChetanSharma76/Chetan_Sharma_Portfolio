@@ -1,10 +1,28 @@
 import { motion } from "framer-motion";
 import { SiLeetcode, SiCodechef, SiCodeforces } from "react-icons/si";
-import { ExternalLink, Trophy, Zap, TrendingUp } from "lucide-react";
+import { ExternalLink, Zap, TrendingUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useQuery } from "@tanstack/react-query";
+
+interface CodingStats {
+  leetcode: number;
+  codeforces: number;
+  codechef: number;
+}
 
 export function Achievements() {
+  // 1. Fetch real-time data
+  const { data: stats, isLoading } = useQuery<CodingStats>({
+    queryKey: ["coding-stats"],
+    queryFn: async () => {
+      const response = await fetch("/api/stats");
+      if (!response.ok) throw new Error("Failed to fetch stats");
+      return response.json();
+    },
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+  });
+
   // Custom Knight Badge for LeetCode
   const LeetCodeKnightBadge = () => (
     <svg width="16" height="16" viewBox="0 0 200 200" fill="none" className="inline-block mr-1.5 -mt-0.5">
@@ -20,11 +38,12 @@ export function Achievements() {
       rating: "1,875",
       maxRating: "Max 1,890",
       rankLabel: "Knight",
-      rankColor: "text-yellow-500", // LeetCode Gold
+      rankColor: "text-yellow-500",
       rankIcon: <LeetCodeKnightBadge />,
-      solved: "650+",
+      // Dynamic Solved Count
+      solved: isLoading ? "..." : `${stats?.leetcode || "650+"}`, 
       desc: "Top 4% Global • Weekly Contest Rank 975",
-      color: "#FFA116", // LeetCode Orange
+      color: "#FFA116",
       bgGlow: "rgba(255, 161, 22, 0.15)",
       link: "https://leetcode.com/u/ChetanSharma1/"
     },
@@ -34,11 +53,12 @@ export function Achievements() {
       rating: "1,395",
       maxRating: "Max 1,410",
       rankLabel: "Pupil",
-      rankColor: "text-green-500", // Codeforces Pupil Green
+      rankColor: "text-green-500",
       rankIcon: <div className="w-2 h-2 rounded-full bg-green-500 mr-2" />,
-      solved: "800+",
+      // Dynamic Solved Count
+      solved: isLoading ? "..." : `${stats?.codeforces || "800+"}`,
       desc: "160+ Day Active Streak • 50+ Contests",
-      color: "#1F8ACB", // Codeforces Blue
+      color: "#1F8ACB",
       bgGlow: "rgba(31, 138, 203, 0.15)",
       link: "https://codeforces.com/profile/chetansharma7777"
     },
@@ -48,11 +68,12 @@ export function Achievements() {
       rating: "1,736",
       maxRating: "Max 1,750",
       rankLabel: "3 Star",
-      rankColor: "text-blue-500", // CodeChef 3-Star Blue
+      rankColor: "text-blue-500",
       rankIcon: <StarIcon className="w-3 h-3 text-blue-500 mr-1" />,
-      solved: "100+",
+      // Dynamic Solved Count
+      solved: isLoading ? "..." : `${stats?.codechef || "100+"}`,
       desc: "Top 5% in Starters 152 • Global Rank 400",
-      color: "#5B4638", // CodeChef Brown
+      color: "#5B4638",
       bgGlow: "rgba(91, 70, 56, 0.2)",
       link: "https://www.codechef.com/users/chetansharma07"
     }
@@ -60,7 +81,7 @@ export function Achievements() {
 
   return (
     <section id="achievements" className="py-24 relative overflow-hidden bg-background">
-      {/* Background Decor: Mathematical Grid */}
+      {/* Background Decor */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -112,11 +133,17 @@ export function Achievements() {
                     
                     {/* Card Header: Icon & Link */}
                     <div className="flex justify-between items-start mb-8">
-                      <div className="p-3 rounded-xl bg-background/50 border border-border/50 shadow-sm">
-                        <platform.icon 
-                          className="w-8 h-8 transition-transform duration-300 group-hover:scale-110" 
-                          style={{ color: platform.color }}
-                        />
+                      <div className="flex items-center gap-3">
+                        <div className="p-3 rounded-xl bg-background/50 border border-border/50 shadow-sm">
+                          <platform.icon 
+                            className="w-8 h-8 transition-transform duration-300 group-hover:scale-110" 
+                            style={{ color: platform.color }}
+                          />
+                        </div>
+                        {/* ADDED: Platform Name explicitly here */}
+                        <span className="text-lg font-bold text-foreground/90 group-hover:text-primary transition-colors">
+                          {platform.name}
+                        </span>
                       </div>
                       <ExternalLink className="w-5 h-5 text-muted-foreground/50 group-hover:text-primary transition-colors" />
                     </div>

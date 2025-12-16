@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { type Server } from "http";
 import { storage } from "./storage.js";
 import { insertContactMessageSchema } from "../shared/schema.js";
+import { fetchCodingStats } from "./lib/stats.js";
 import { fromZodError } from "zod-validation-error";
 import nodemailer from "nodemailer";
 
@@ -47,6 +48,23 @@ export async function registerRoutes(httpServer: Server, app: Express) {
         console.error("Server Error:", error);
         res.status(500).json({ success: false, error: "Internal Server Error" });
       }
+    }
+  });
+
+  app.get("/api/stats", async (req, res) => {
+    try {
+      // REPLACE THESE WITH YOUR ACTUAL USERNAMES
+      const usernames = {
+        leetcode: "ChetanSharma1", 
+        codeforces: "chetansharma7777",
+        codechef: "chetansharma07"
+      };
+
+      const stats = await fetchCodingStats(usernames);
+      res.json(stats);
+    } catch (error) {
+      console.error("Stats API Error:", error);
+      res.status(500).json({ error: "Failed to fetch stats" });
     }
   });
 
