@@ -1,3 +1,6 @@
 import app from '../server/index';
-// Vercel expects a default export that handles the request
-export default app;
+import type { IncomingMessage, ServerResponse } from 'http';
+
+export default async function handler(req: IncomingMessage, res: ServerResponse) {
+  await app(req, res);
+}
