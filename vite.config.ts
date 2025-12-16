@@ -1,20 +1,19 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { metaImagesPlugin } from "./vite-plugin-meta-images";
 
-// ESM way to get directory name
+// 1. Setup __dirname for ESM
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 export default defineConfig({
   plugins: [
     react(),
     runtimeErrorOverlay(),
-    tailwindcss(),
+    // 2. REMOVED tailwindcss() from here. 
+    // Tailwind v3 uses postcss.config.js automatically.
     metaImagesPlugin(),
-    // We removed the Replit plugins causing issues for now to simplify
   ],
   resolve: {
     alias: {
