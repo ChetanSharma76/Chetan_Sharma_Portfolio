@@ -1,136 +1,153 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Landmark, School, Star } from "lucide-react";
 
 interface AcademicItem {
   title: string;
   institution: string;
   year: string;
   score: string;
+  scoreLabel: string; // Separated for styling
   details: string;
   subjects: string[];
+  icon: React.ElementType;
 }
 
 export function Academics() {
   const academics: AcademicItem[] = [
     {
-      title: "Bachelor of Technology (B.Tech)",
+      title: "Bachelor of Technology",
       institution: "Indian Institute of Technology (IIT) Patna",
       year: "2022 – 2026",
-      score: "CPI: 8.58",
+      score: "8.58",
+      scoreLabel: "CPI",
       details: "Electrical and Electronics Engineering",
-      subjects: ["Electrical and Electronics Engineering"],
+      subjects: ["DSA", "OOPS", "DBMS", "CN", "OS", "AI/ML"],
+      icon: GraduationCap,
     },
     {
-      title: "Senior Secondary (Class 12)",
+      title: "Senior Secondary (XII)",
       institution: "M.P.S.M. Grace Convent Sr. Sec. School",
       year: "2022",
       score: "94.2%",
-      details: "Science Stream",
-      subjects: ["Physics", "Chemistry", "Maths"],
+      scoreLabel: "Aggregate",
+      details: "Science Stream (PCM)",
+      subjects: ["Physics", "Chemistry", "Mathematics"],
+      icon: Landmark,
     },
     {
-      title: "Secondary (Class 10)",
+      title: "Secondary School (X)",
       institution: "M.P.S.M. Grace Convent Sr. Sec. School",
       year: "2020",
       score: "94.4%",
+      scoreLabel: "Aggregate",
       details: "Science Stream",
       subjects: ["Science", "Maths", "Computer Science"],
+      icon: School,
     },
   ];
 
   return (
-    <section id="academics" className="py-20 relative overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="academics" className="py-24 relative overflow-hidden bg-background">
+      {/* Background Decor: Technical Dot Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      
+      {/* Subtle Radial Gradient for depth */}
+      <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
 
-        {/* Header */}
+      <div className="container mx-auto px-6 relative z-10">
+        
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 text-center"
+          className="flex flex-col items-center mb-16 space-y-4 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-3">
-            Academic <span className="text-gradient">Journey</span>
+          <Badge variant="outline" className="uppercase tracking-widest text-[10px] px-3 py-1 border-primary/20 bg-primary/5 text-primary">
+            Education
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+            Academic <span className="text-primary">Milestones</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
-            A structured path of continuous learning, dedication, and growth across foundational to advanced education.
+          <p className="text-muted-foreground max-w-2xl text-lg font-light leading-relaxed">
+            A chronological overview of my educational background, highlighting institutions and performance metrics.
           </p>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mx-auto mt-4" />
         </motion.div>
 
-        {/* Academic Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        {/* Cards Layout */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {academics.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
               className="h-full"
             >
-              <div className="relative group h-full">
-                {/* Glow Border */}
-                <div className="absolute inset-0 -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-10 group-hover:opacity-20 transition-all duration-500"></div>
+              <Card className="
+                group relative h-full flex flex-col justify-between overflow-hidden
+                border border-border/40 bg-card/50 backdrop-blur-sm
+                hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5
+                transition-all duration-300 ease-out
+              ">
+                
+                {/* Top Accent Line */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <Card className="relative bg-card/40 backdrop-blur-md border border-border/40 p-6 h-full flex flex-col justify-between group-hover:bg-card/60 transition-all duration-500">
-
-                  {/* Top Icon */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-11 h-11 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-                      <GraduationCap className="w-5 h-5" />
+                <div className="p-8 flex flex-col h-full">
+                  {/* Header: Year & Icon */}
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="p-3 rounded-lg bg-primary/10 text-primary ring-1 ring-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                      <item.icon className="w-5 h-5" />
                     </div>
-
-                    <Badge
-                      variant="outline"
-                      className="text-xs bg-primary/5 text-primary border-primary/20 px-2 py-1"
-                    >
+                    <Badge variant="secondary" className="font-mono text-xs font-normal bg-secondary/50 text-secondary-foreground border-transparent">
                       {item.year}
                     </Badge>
                   </div>
 
-                  {/* Title */}
-                  <div className="mb-3">
-                    <h3 className="text-lg font-semibold text-foreground leading-tight">
+                  {/* Content: Title & Institution */}
+                  <div className="mb-6">
+                    <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-1">
+                    <p className="text-sm font-medium text-muted-foreground mb-1">
+                      {item.institution}
+                    </p>
+                    <p className="text-xs text-muted-foreground/60 italic">
                       {item.details}
                     </p>
                   </div>
 
-                  {/* Institution */}
-                  <div className="mb-4">
-                    <p className="font-medium text-foreground/90 text-sm">{item.institution}</p>
-                  </div>
+                  {/* Footer: Score & Subjects */}
+                  <div className="mt-auto pt-6 border-t border-border/30">
+                    <div className="flex items-end justify-between mb-4">
+                      <div className="flex flex-col">
+                        <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
+                          {item.scoreLabel}
+                        </span>
+                        <span className="text-3xl font-bold text-foreground tracking-tight">
+                          {item.score}
+                        </span>
+                      </div>
+                      <Star className="w-6 h-6 text-yellow-500/20 fill-yellow-500/20 group-hover:text-yellow-500 group-hover:fill-yellow-500 transition-all duration-500" />
+                    </div>
 
-                  {/* Subjects */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {item.subjects.map((subject, idx) => (
-                      <Badge
-                        key={idx}
-                        variant="secondary"
-                        className="text-xs bg-accent/10 text-accent border-0"
-                      >
-                        {subject}
-                      </Badge>
-                    ))}
+                    <div className="flex flex-wrap gap-1.5">
+                      {item.subjects.map((subject, idx) => (
+                        <span 
+                          key={idx} 
+                          className="text-[10px] px-2 py-1 rounded bg-secondary/30 text-secondary-foreground border border-border/20"
+                        >
+                          {subject}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-
-                  {/* Score */}
-                  <div className="mt-auto p-3 rounded-lg bg-primary/5 border border-primary/10">
-                    <p className="text-xs text-muted-foreground mb-1">
-                      Performance
-                    </p>
-                    <p className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                      {item.score}
-                    </p>
-                  </div>
-
-                </Card>
-              </div>
+                </div>
+              </Card>
             </motion.div>
           ))}
         </div>

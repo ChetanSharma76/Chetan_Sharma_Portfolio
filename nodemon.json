@@ -1,0 +1,8 @@
+{
+  "watch": ["server"],
+  "ext": "ts,json",
+  "ignore": ["client", "dist", "node_modules"],
+  "exec": "cross-env NODE_ENV=development tsx server/index.ts",
+  "signal": "SIGTERM",
+  "delay": "200"
+}

@@ -8,6 +8,7 @@ import { Projects } from "@/components/projects";
 import { Achievements } from "@/components/achievements";
 import { Por } from "@/components/por";
 import { Contact } from "@/components/contact";
+import { Footer } from "@/components/footer.tsx"; // Added import
 import { AnimatedBackground } from "@/components/animated-bg";
 
 export default function Home() {
@@ -28,15 +29,9 @@ export default function Home() {
           <Contact />
         </main>
         
-        <footer className="py-8 border-t border-white/10 bg-black/20 text-center text-muted-foreground text-sm">
-          <p>
-            © {new Date().getFullYear()} • Built with{" "}
-            <span className="text-red-500 animate-pulse inline-block">❤️</span> by
-            <span className="font-semibold text-white/80"> Chetan Sharma</span>.
-          </p>
-        </footer>
-
-
+        {/* Integrated the new Footer component here */}
+        <Footer />
+        
       </div>
     </div>
   );

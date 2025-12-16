@@ -1,77 +1,68 @@
 import { motion } from "framer-motion";
 import { SiLeetcode, SiCodechef, SiCodeforces } from "react-icons/si";
-import { TiltCard } from "@/components/ui/tilt-card";
-import { FaChessKnight } from "react-icons/fa"; // Knight icon
-
+import { ExternalLink, Trophy, Zap, TrendingUp } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export function Achievements() {
-  // LeetCode Knight Badge (SVG)
-const LeetCodeKnightBadge = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 200 200"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="inline-block"
-  >
-    <path
-      d="M100 10L20 40V95C20 150 55 180 100 190C145 180 180 150 180 95V40L100 10Z"
-      fill="#2D2D2D"
-      stroke="#F7B500"
-      strokeWidth="12"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M100 55L85 95L100 135L115 95L100 55Z"
-      fill="#F7B500"
-    />
-    <rect x="93" y="30" width="14" height="110" rx="7" fill="#F7B500" />
-  </svg>
-);
-    const platforms = [
+  // Custom Knight Badge for LeetCode
+  const LeetCodeKnightBadge = () => (
+    <svg width="16" height="16" viewBox="0 0 200 200" fill="none" className="inline-block mr-1.5 -mt-0.5">
+      <path d="M100 10L20 40V95C20 150 55 180 100 190C145 180 180 150 180 95V40L100 10Z" fill="#2D2D2D" stroke="#F7B500" strokeWidth="12" strokeLinejoin="round"/>
+      <path d="M100 55L85 95L100 135L115 95L100 55Z" fill="#F7B500"/>
+    </svg>
+  );
+
+  const platforms = [
     {
       name: "LeetCode",
       icon: SiLeetcode,
-      rating: "1875",
-      rank: (
-        <div className="flex items-center gap-2 text-yellow-400 font-bold">
-          <LeetCodeKnightBadge />
-          Knight
-        </div>
-      ),
+      rating: "1,875",
+      maxRating: "Max 1,890",
+      rankLabel: "Knight",
+      rankColor: "text-yellow-500", // LeetCode Gold
+      rankIcon: <LeetCodeKnightBadge />,
       solved: "650+",
-      desc: "Ranked 975/25,000+ in Weekly Contest 422.",
-      color: "#FFA116",
+      desc: "Top 4% Global • Weekly Contest Rank 975",
+      color: "#FFA116", // LeetCode Orange
+      bgGlow: "rgba(255, 161, 22, 0.15)",
       link: "https://leetcode.com/u/ChetanSharma1/"
     },
-
     {
       name: "Codeforces",
       icon: SiCodeforces,
-      rating: "1395",
-      rank: <span className="text-green-400 font-semibold">Pupil</span>,
+      rating: "1,395",
+      maxRating: "Max 1,410",
+      rankLabel: "Pupil",
+      rankColor: "text-green-500", // Codeforces Pupil Green
+      rankIcon: <div className="w-2 h-2 rounded-full bg-green-500 mr-2" />,
       solved: "800+",
-      desc: "Maintained a 160+ day coding streak.",
-      color: "#1F8ACB",
+      desc: "160+ Day Active Streak • 50+ Contests",
+      color: "#1F8ACB", // Codeforces Blue
+      bgGlow: "rgba(31, 138, 203, 0.15)",
       link: "https://codeforces.com/profile/chetansharma7777"
     },
-
     {
       name: "CodeChef",
       icon: SiCodechef,
-      rating: "1736",
-      rank: <span className="text-amber-400 tracking-wider text-lg">★ ★ ★</span>,
+      rating: "1,736",
+      maxRating: "Max 1,750",
+      rankLabel: "3 Star",
+      rankColor: "text-blue-500", // CodeChef 3-Star Blue
+      rankIcon: <StarIcon className="w-3 h-3 text-blue-500 mr-1" />,
       solved: "100+",
-      desc: "Top 5% in Starters 152.",
-      color: "#5B4638",
+      desc: "Top 5% in Starters 152 • Global Rank 400",
+      color: "#5B4638", // CodeChef Brown
+      bgGlow: "rgba(91, 70, 56, 0.2)",
       link: "https://www.codechef.com/users/chetansharma07"
     }
   ];
 
-
   return (
-    <section id="achievements" className="py-24 relative overflow-hidden">
+    <section id="achievements" className="py-24 relative overflow-hidden bg-background">
+      {/* Background Decor: Mathematical Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
+
       <div className="container mx-auto px-6 relative z-10">
         
         {/* Header */}
@@ -79,116 +70,99 @@ const LeetCodeKnightBadge = () => (
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 text-center"
+          className="mb-16 md:mb-20 text-center max-w-2xl mx-auto"
         >
-          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
-            Problem <span className="text-gradient">Solving</span>
+          <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
+            Competitive Programming
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            Algorithmic <span className="text-primary">Mastery</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Demonstrated excellence in competitive programming across major global platforms.
+          <p className="text-muted-foreground text-lg leading-relaxed">
+             Consistent performance across global coding platforms, demonstrating strong data structure knowledge and problem-solving agility.
           </p>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Stats Grid */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {platforms.map((platform, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="h-full"
             >
-              <a href={platform.link} target="_blank" rel="noreferrer" className="block h-full">
-                <TiltCard className="h-full">
-                  <div className="bg-card/40 backdrop-blur-xl border border-border p-8 rounded-2xl hover:bg-card/60 transition-all group h-full relative overflow-hidden">
+              <a href={platform.link} target="_blank" rel="noreferrer" className="block h-full group">
+                <Card className="
+                  relative h-full overflow-hidden
+                  bg-card/40 backdrop-blur-md border-border/50
+                  hover:border-primary/20 transition-all duration-300
+                  group-hover:translate-y-[-4px] group-hover:shadow-lg
+                ">
+                  
+                  {/* Subtle Brand Glow Background */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: `radial-gradient(circle at top right, ${platform.bgGlow}, transparent 70%)` }}
+                  />
 
-                    {/* Hover Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                    <div className="flex flex-col items-center text-center relative z-10">
-
-                      {/* ICON — Brighter on Hover */}
-                    <div className="p-4 rounded-2xl bg-background/50 mb-6 border border-border group-hover:border-primary/20 transition-colors shadow-lg">
-                      {platform.name === "Codeforces" ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 600 150"
-                          className="w-32 h-14 transition-all duration-300 group-hover:brightness-150 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-                        >
-
-                          {/* Yellow (Medium) */}
-                          <rect width="45" height="90" x="10" y="40" fill="#F9C80E" rx="6" />
-
-                          {/* Blue (Tallest) */}
-                          <rect width="45" height="120" x="70" y="10" fill="#1F8ACB" rx="6" />
-
-                          {/* Red (Smallest) */}
-                          <rect width="45" height="70" x="130" y="60" fill="#D7263D" rx="6" />
-
-                          {/* Text */}
-                          <text
-                            x="200"
-                            y="95"
-                            fontSize="65"
-                            fontWeight="900"
-                            fill="white"
-                            fontFamily="Arial, Helvetica, sans-serif"
-                          >
-                            Codeforces
-                          </text>
-                        </svg>
-
-                      ) : (
-                        <platform.icon
-                          className="w-12 h-12 transition-all duration-300 group-hover:brightness-150 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]"
+                  <div className="p-6 flex flex-col h-full relative z-10">
+                    
+                    {/* Card Header: Icon & Link */}
+                    <div className="flex justify-between items-start mb-8">
+                      <div className="p-3 rounded-xl bg-background/50 border border-border/50 shadow-sm">
+                        <platform.icon 
+                          className="w-8 h-8 transition-transform duration-300 group-hover:scale-110" 
                           style={{ color: platform.color }}
                         />
-                      )}
+                      </div>
+                      <ExternalLink className="w-5 h-5 text-muted-foreground/50 group-hover:text-primary transition-colors" />
                     </div>
 
-
-
-                      {/* Platform Name */}
-                      <h3 className="text-2xl font-bold mb-2 font-heading text-foreground">
-                        {platform.name}
-                      </h3>
-
-                      {/* Rating + Solved */}
-                      <div className="flex items-center justify-center gap-4 mb-4 w-full">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-foreground tracking-tight">
-                            {platform.rating}
-                          </div>
-                          <div className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                            Rating
-                          </div>
+                    {/* Stats Row */}
+                    <div className="grid grid-cols-2 gap-4 mb-8">
+                      <div>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-1 flex items-center gap-1">
+                          <TrendingUp className="w-3 h-3" /> Rating
+                        </p>
+                        <div className="text-3xl font-bold font-mono tracking-tighter text-foreground">
+                          {platform.rating}
                         </div>
+                        <p className="text-[10px] text-muted-foreground/60 font-mono mt-1">
+                          {platform.maxRating}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-1 flex items-center gap-1">
+                          <Zap className="w-3 h-3" /> Solved
+                        </p>
+                        <div className="text-3xl font-bold font-mono tracking-tighter text-foreground">
+                          {platform.solved}
+                        </div>
+                        <p className="text-[10px] text-muted-foreground/60 font-mono mt-1">
+                          Problems
+                        </p>
+                      </div>
+                    </div>
 
-                        <div className="w-[1px] h-8 bg-border"></div>
-
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-primary tracking-tight">
-                            {platform.solved}
-                          </div>
-                          <div className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                            Solved
-                          </div>
+                    {/* Footer: Rank & Description */}
+                    <div className="mt-auto pt-6 border-t border-border/40">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-sm font-medium text-muted-foreground">Current Rank</span>
+                        <div className={`flex items-center font-bold ${platform.rankColor} bg-background/50 px-2.5 py-1 rounded-md border border-border/50`}>
+                           {platform.rankIcon}
+                           {platform.rankLabel}
                         </div>
                       </div>
-
-                      {/* Rank — Custom badges */}
-                      <div className="text-sm font-medium text-foreground/90 mb-4 uppercase tracking-wider px-4 py-1 rounded-full bg-background/50 border border-border flex items-center justify-center gap-1">
-                        {platform.rank}
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <p className="text-xs text-muted-foreground/80 leading-relaxed">
                         {platform.desc}
                       </p>
                     </div>
+
                   </div>
-                </TiltCard>
+                </Card>
               </a>
             </motion.div>
           ))}
@@ -196,5 +170,19 @@ const LeetCodeKnightBadge = () => (
 
       </div>
     </section>
+  );
+}
+
+// Simple helper for CodeChef stars
+function StarIcon({ className }: { className?: string }) {
+  return (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 24" 
+      fill="currentColor" 
+      className={className}
+    >
+      <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
+    </svg>
   );
 }
