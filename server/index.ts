@@ -6,11 +6,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Helper to start the server
-async function bootstrap() {
+// Global variable to hold the initialized app so we don't rebuild it on every request
+let appInitialized = false;
+
+async function setupApp() {
+  if (appInitialized) return app;
+
   const httpServer = createServer(app);
 
-  // 1. Register API Routes (pass app and server)
+  // 1. Register API Routes
   await registerRoutes(httpServer, app);
 
   // 2. Setup Error Handling
@@ -23,23 +27,24 @@ async function bootstrap() {
 
   // 3. Setup Vite (ONLY in Development)
   if (process.env.NODE_ENV !== "production") {
-    // DYNAMIC IMPORT: This prevents the crash in production
     const { setupVite } = await import("./vite");
     await setupVite(httpServer, app);
   }
 
-  return httpServer;
+  appInitialized = true;
+  return app;
 }
 
-// 4. Start Server (Only if running locally)
+// Start Server (Only if running locally)
 if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 5000;
-  bootstrap().then((server) => {
-    server.listen(PORT, () => {
+  setupApp().then((appInstance) => {
+    const PORT = process.env.PORT || 5000;
+    const httpServer = createServer(appInstance); // Re-create server wrapper for local
+    httpServer.listen(PORT, () => {
       console.log(`🚀 Server running locally on http://localhost:${PORT}`);
     });
   });
 }
 
-// 5. Export app for Vercel
-export default app;
+// Export the SETUP function, not the app directly
+export default setupApp;
