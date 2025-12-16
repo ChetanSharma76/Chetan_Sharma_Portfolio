@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { type Server } from "http";
-import { storage } from "./storage";
-import { insertContactMessageSchema } from "@shared/schema";
+import { storage } from "./storage.js";
+import { insertContactMessageSchema } from "../shared/schema.js";
 import { fromZodError } from "zod-validation-error";
 import nodemailer from "nodemailer";
 

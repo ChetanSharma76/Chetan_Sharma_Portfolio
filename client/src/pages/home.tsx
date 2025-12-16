@@ -8,7 +8,7 @@ import { Projects } from "@/components/projects";
 import { Achievements } from "@/components/achievements";
 import { Por } from "@/components/por";
 import { Contact } from "@/components/contact";
-import { Footer } from "@/components/footer.tsx"; // Added import
+import { Footer } from "@/components/footer"; // Added import
 import { AnimatedBackground } from "@/components/animated-bg";
 
 export default function Home() {

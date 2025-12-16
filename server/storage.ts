@@ -1,5 +1,5 @@
-import { type ContactMessage, type InsertContactMessage, contactMessages } from "@shared/schema";
-import { db } from "./db";
+import { type ContactMessage, type InsertContactMessage, contactMessages } from "../shared/schema.js";
+import { db } from "./db.js";
 
 export interface IStorage {
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;

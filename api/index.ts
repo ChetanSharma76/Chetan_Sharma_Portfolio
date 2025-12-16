@@ -1,12 +1,7 @@
-import setupApp from '../server/index';
-// @ts-ignore
-import type { IncomingMessage, ServerResponse } from 'http';
+// Notice the .js extension! This is required for ESM.
+import setupApp from '../server/index.js'; 
 
-export default async function handler(req: IncomingMessage, res: ServerResponse) {
-  // Initialize the app cleanly for every serverless request
+export default async function handler(req: any, res: any) {
   const app = await setupApp();
-  
-  // Pass the request to Express
-  // @ts-ignore
   app(req, res);
 }
