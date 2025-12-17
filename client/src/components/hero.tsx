@@ -3,22 +3,25 @@ import { Github, Linkedin, Mail, ExternalLink, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 
-// --- COMPONENT: Interactive Spotlight Grid (Existing) ---
+// --- COMPONENT: Interactive Spotlight Grid (FIXED) ---
 function SpotlightGrid() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-      const checkMobile = () => setIsMobile(window.innerWidth < 768);
-      checkMobile();
-      window.addEventListener("resize", checkMobile);
-    const updateMousePosition = (e: MouseEvent) => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    
+    // Explicitly typing 'e' as the global MouseEvent to avoid React.MouseEvent confusion
+    const updateMousePosition = (e: globalThis.MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
+    
     window.addEventListener("mousemove", updateMousePosition);
     return () => {
-        window.removeEventListener("mousemove", updateMousePosition);
-        window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("mousemove", updateMousePosition);
+      window.removeEventListener("resize", checkMobile);
     }
   }, []);
 
@@ -30,10 +33,11 @@ function SpotlightGrid() {
       {!isMobile && (
       <motion.div
         className="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+        // FIX: Added 'as any' here to bypass the strict type check for WebkitMaskImage
         animate={{
           maskImage: `radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, black, transparent)`,
           WebkitMaskImage: `radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, black, transparent)`,
-        }}
+        } as any}
         transition={{ type: "tween", ease: "backOut", duration: 0 }}
       />
       )}
@@ -43,48 +47,45 @@ function SpotlightGrid() {
 }
 
 // --- NEW COMPONENT: Background Tech Animation ---
-// Adds slow-moving abstract data blocks for a professional tech feel.
 function TechBackgroundAnimation() {
-    // These theme-aware colors ensure it looks good in light AND dark mode automatically.
-    const blockClass = "absolute rounded-[40px] backdrop-blur-3xl bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20";
+   const blockClass = "absolute rounded-[40px] backdrop-blur-3xl bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20";
 
-    return (
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-         {/* Abstract Block 1 - Top Left moving slowly */}
-         <motion.div
-           className={`${blockClass} -top-[10%] -left-[10%] w-[50vw] h-[50vw] rotate-12`}
-           animate={{
-             x: ["0%", "10%", "0%"],
-             y: ["0%", "15%", "0%"],
-             rotate: [12, 24, 12]
-           }}
-           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-         />
+   return (
+     <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        {/* Abstract Block 1 */}
+        <motion.div
+          className={`${blockClass} -top-[10%] -left-[10%] w-[50vw] h-[50vw] rotate-12`}
+          animate={{
+            x: ["0%", "10%", "0%"],
+            y: ["0%", "15%", "0%"],
+            rotate: [12, 24, 12]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+        />
 
-         {/* Abstract Block 2 - Bottom Right moving slowly */}
-         <motion.div
-           className={`${blockClass} -bottom-[20%] -right-[10%] w-[40vw] h-[40vw] -rotate-12 rounded-[60px]`}
-           animate={{
-             x: ["0%", "-10%", "0%"],
-             y: ["0%", "-20%", "0%"],
-             rotate: [-12, 0, -12]
-           }}
-           transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-         />
-         
-         {/* Optional subtle circuit pattern overlay */}
-         <svg className="absolute inset-0 w-full h-full opacity-[0.05] dark:opacity-[0.1]" xmlns="http://www.w3.org/2000/svg">
-             <pattern id="tech-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                 <path d="M100 0H0V100" fill="none" stroke="currentColor" strokeWidth="1" className="text-primary"/>
-             </pattern>
-             <rect x="0" y="0" width="100%" height="100%" fill="url(#tech-pattern)"></rect>
-         </svg>
-      </div>
-    );
-  }
+        {/* Abstract Block 2 */}
+        <motion.div
+          className={`${blockClass} -bottom-[20%] -right-[10%] w-[40vw] h-[40vw] -rotate-12 rounded-[60px]`}
+          animate={{
+            x: ["0%", "-10%", "0%"],
+            y: ["0%", "-20%", "0%"],
+            rotate: [-12, 0, -12]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+        
+        {/* Circuit pattern overlay */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.05] dark:opacity-[0.1]" xmlns="http://www.w3.org/2000/svg">
+            <pattern id="tech-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M100 0H0V100" fill="none" stroke="currentColor" strokeWidth="1" className="text-primary"/>
+            </pattern>
+            <rect x="0" y="0" width="100%" height="100%" fill="url(#tech-pattern)"></rect>
+        </svg>
+     </div>
+   );
+ }
 
-
-// --- TYPEWRITER COMPONENT (Existing) ---
+// --- TYPEWRITER COMPONENT ---
 const TypewriterText = ({ texts }: { texts: string[] }) => {
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
@@ -128,11 +129,8 @@ export function Hero() {
     <section id="about" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-20">
       
       {/* --- BACKGROUND LAYERS --- */}
-      {/* 1. The new slow-moving tech blocks layer */}
       <TechBackgroundAnimation />
-      {/* 2. The existing interactive grid layer on top of the animation */}
       <SpotlightGrid />
-
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -193,9 +191,9 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* RIGHT: Profile Card (Existing) */}
+          {/* RIGHT: Profile Card */}
           <div className="relative h-[500px] w-full flex items-center justify-center perspective-1000">
-             
+              
             <motion.div
               style={{ y: y1 }}
               initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
@@ -203,10 +201,8 @@ export function Hero() {
               transition={{ duration: 1, delay: 0.2 }}
               className="relative z-10 my-10 md:my-0 group perspective-1000"
             >
-              {/* --- DECORATIVE BACK GLOW (Subtle & Premium) --- */}
               <div className="absolute -inset-3 bg-gradient-to-tr from-primary/20 via-blue-500/10 to-purple-500/20 rounded-[28px] blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-700 -z-10"></div>
 
-              {/* --- MAIN "MUSEUM GLASS" CARD --- */}
               <div className="
                 relative w-[220px] h-[280px] md:w-[260px] md:h-[320px] 
                 rounded-[20px] overflow-hidden 
@@ -216,8 +212,6 @@ export function Hero() {
                 transition-all duration-500
                 group-hover:border-primary/40
               ">
-                
-                {/* --- THE PHOTO (Crystal Clear) --- */}
                 <div className="absolute inset-0 z-0">
                   <img 
                     src="/profile-photo-3.png" 
@@ -227,17 +221,11 @@ export function Hero() {
                   />
                 </div>
 
-                {/* --- LIGHTING SHEEN EFFECT --- */}
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out z-10 pointer-events-none" />
-
-                {/* --- TEXT PROTECTION GRADIENT --- */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-90 z-10" />
 
-                {/* --- CARD CONTENT --- */}
                 <div className="absolute bottom-0 left-0 w-full p-5 text-left z-20 flex flex-col justify-end h-full">
                   <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-
-                    
                     <h3 className="text-white font-bold text-2xl tracking-tight mb-0.5 drop-shadow-lg">
                       Chetan Sharma
                     </h3>
@@ -248,9 +236,7 @@ export function Hero() {
                 </div>
               </div>
             </motion.div>
-
           </div>
-
         </div>
       </div>
       

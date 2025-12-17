@@ -3,27 +3,17 @@ import { SiLeetcode, SiCodechef, SiCodeforces } from "react-icons/si";
 import { ExternalLink, Zap, TrendingUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useQuery } from "@tanstack/react-query";
 
+// Interface matches what the API returns
 interface CodingStats {
   leetcode: number;
   codeforces: number;
   codechef: number;
 }
 
-export function Achievements() {
-  // 1. Fetch real-time data
-  const { data: stats, isLoading } = useQuery<CodingStats>({
-    queryKey: ["coding-stats"],
-    queryFn: async () => {
-      const response = await fetch("/api/stats");
-      if (!response.ok) throw new Error("Failed to fetch stats");
-      return response.json();
-    },
-    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
-  });
-
-  // Custom Knight Badge for LeetCode
+// 1. Accept stats as a Prop
+export function Achievements({ stats }: { stats?: CodingStats }) {
+  
   const LeetCodeKnightBadge = () => (
     <svg width="16" height="16" viewBox="0 0 200 200" fill="none" className="inline-block mr-1.5 -mt-0.5">
       <path d="M100 10L20 40V95C20 150 55 180 100 190C145 180 180 150 180 95V40L100 10Z" fill="#2D2D2D" stroke="#F7B500" strokeWidth="12" strokeLinejoin="round"/>
@@ -40,11 +30,11 @@ export function Achievements() {
       rankLabel: "Knight",
       rankColor: "text-yellow-500",
       rankIcon: <LeetCodeKnightBadge />,
-      // Dynamic Solved Count
-      solved: isLoading ? "..." : `${stats?.leetcode || "650+"}`, 
+      // 2. Use the passed prop directly
+      solved: `${stats?.leetcode || "650+"}`, 
       desc: "Top 4% Global • Weekly Contest Rank 975",
       color: "#FFA116",
-      bgGlow: "rgba(255, 161, 22, 0.15)",
+      bgGlow: "rgba(255, 161, 22, 0.25)",
       link: "https://leetcode.com/u/ChetanSharma1/"
     },
     {
@@ -55,11 +45,10 @@ export function Achievements() {
       rankLabel: "Pupil",
       rankColor: "text-green-500",
       rankIcon: <div className="w-2 h-2 rounded-full bg-green-500 mr-2" />,
-      // Dynamic Solved Count
-      solved: isLoading ? "..." : `${stats?.codeforces || "800+"}`,
+      solved: `${stats?.codeforces || "800+"}`,
       desc: "160+ Day Active Streak • 50+ Contests",
       color: "#1F8ACB",
-      bgGlow: "rgba(31, 138, 203, 0.15)",
+      bgGlow: "rgba(31, 138, 203, 0.25)",
       link: "https://codeforces.com/profile/chetansharma7777"
     },
     {
@@ -70,23 +59,19 @@ export function Achievements() {
       rankLabel: "3 Star",
       rankColor: "text-blue-500",
       rankIcon: <StarIcon className="w-3 h-3 text-blue-500 mr-1" />,
-      // Dynamic Solved Count
-      solved: isLoading ? "..." : `${stats?.codechef || "100+"}`,
+      solved: `${stats?.codechef || "100+"}`,
       desc: "Top 5% in Starters 152 • Global Rank 400",
       color: "#5B4638",
-      bgGlow: "rgba(91, 70, 56, 0.2)",
+      bgGlow: "rgba(91, 70, 56, 0.3)",
       link: "https://www.codechef.com/users/chetansharma07"
     }
   ];
 
   return (
     <section id="achievements" className="py-24 relative overflow-hidden bg-background">
-      {/* Background Decor */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        
-        {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -104,7 +89,6 @@ export function Achievements() {
           </p>
         </motion.div>
 
-        {/* Stats Grid */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {platforms.map((platform, index) => (
             <motion.div
@@ -119,28 +103,27 @@ export function Achievements() {
                 <Card className="
                   relative h-full overflow-hidden
                   bg-card/40 backdrop-blur-md border-border/50
-                  hover:border-primary/20 transition-all duration-300
-                  group-hover:translate-y-[-4px] group-hover:shadow-lg
+                  hover:bg-card/60 
+                  hover:border-primary/50 
+                  hover:shadow-[0_0_30px_-5px_rgba(0,0,0,0.1)]
+                  hover:shadow-primary/10
+                  transition-all duration-500
+                  group-hover:translate-y-[-4px]
                 ">
-                  
-                  {/* Subtle Brand Glow Background */}
                   <div 
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: `radial-gradient(circle at top right, ${platform.bgGlow}, transparent 70%)` }}
+                    style={{ background: `radial-gradient(circle at top right, ${platform.bgGlow}, transparent 80%)` }}
                   />
 
                   <div className="p-6 flex flex-col h-full relative z-10">
-                    
-                    {/* Card Header: Icon & Link */}
                     <div className="flex justify-between items-start mb-8">
                       <div className="flex items-center gap-3">
-                        <div className="p-3 rounded-xl bg-background/50 border border-border/50 shadow-sm">
+                        <div className="p-3 rounded-xl bg-background/50 border border-border/50 shadow-sm group-hover:border-primary/30 transition-colors">
                           <platform.icon 
-                            className="w-8 h-8 transition-transform duration-300 group-hover:scale-110" 
+                            className="w-8 h-8 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-md" 
                             style={{ color: platform.color }}
                           />
                         </div>
-                        {/* ADDED: Platform Name explicitly here */}
                         <span className="text-lg font-bold text-foreground/90 group-hover:text-primary transition-colors">
                           {platform.name}
                         </span>
@@ -148,13 +131,12 @@ export function Achievements() {
                       <ExternalLink className="w-5 h-5 text-muted-foreground/50 group-hover:text-primary transition-colors" />
                     </div>
 
-                    {/* Stats Row */}
                     <div className="grid grid-cols-2 gap-4 mb-8">
                       <div>
                         <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-1 flex items-center gap-1">
                           <TrendingUp className="w-3 h-3" /> Rating
                         </p>
-                        <div className="text-3xl font-bold font-mono tracking-tighter text-foreground">
+                        <div className="text-3xl font-bold font-mono tracking-tighter text-foreground group-hover:text-primary/90 transition-colors">
                           {platform.rating}
                         </div>
                         <p className="text-[10px] text-muted-foreground/60 font-mono mt-1">
@@ -165,7 +147,7 @@ export function Achievements() {
                         <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-1 flex items-center gap-1">
                           <Zap className="w-3 h-3" /> Solved
                         </p>
-                        <div className="text-3xl font-bold font-mono tracking-tighter text-foreground">
+                        <div className="text-3xl font-bold font-mono tracking-tighter text-foreground group-hover:text-primary/90 transition-colors">
                           {platform.solved}
                         </div>
                         <p className="text-[10px] text-muted-foreground/60 font-mono mt-1">
@@ -174,11 +156,10 @@ export function Achievements() {
                       </div>
                     </div>
 
-                    {/* Footer: Rank & Description */}
-                    <div className="mt-auto pt-6 border-t border-border/40">
+                    <div className="mt-auto pt-6 border-t border-border/40 group-hover:border-primary/20 transition-colors">
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-sm font-medium text-muted-foreground">Current Rank</span>
-                        <div className={`flex items-center font-bold ${platform.rankColor} bg-background/50 px-2.5 py-1 rounded-md border border-border/50`}>
+                        <div className={`flex items-center font-bold ${platform.rankColor} bg-background/50 px-2.5 py-1 rounded-md border border-border/50 group-hover:border-primary/20 transition-colors`}>
                            {platform.rankIcon}
                            {platform.rankLabel}
                         </div>
@@ -194,13 +175,11 @@ export function Achievements() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
 }
 
-// Simple helper for CodeChef stars
 function StarIcon({ className }: { className?: string }) {
   return (
     <svg 

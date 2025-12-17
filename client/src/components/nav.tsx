@@ -7,7 +7,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils"; // Assuming you have a standard shadcn utils file
+import { cn } from "@/lib/utils"; 
 
 export function Nav() {
   const { theme, setTheme } = useTheme();
@@ -17,7 +17,6 @@ export function Nav() {
   const [activeTab, setActiveTab] = useState("Home");
   const { scrollY } = useScroll();
 
-  // Handle Scroll Direction (Hide on down, Show on up)
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
     if (latest > previous && latest > 150) {
@@ -87,8 +86,6 @@ export function Nav() {
                   />
                 )}
                 <span className="relative z-10 flex items-center gap-2">
-                   {/* Only show icon for active tab to keep it clean, or remove icons entirely for max minimalism */}
-                   {/* {activeTab === link.name && <link.icon className="w-3 h-3" />} */}
                    {link.name}
                 </span>
               </a>
@@ -165,11 +162,10 @@ export function Nav() {
                 <div className="container mx-auto px-6 py-8 flex flex-col h-full">
                   <div className="flex justify-between items-center mb-12">
                      <span className="font-bold text-2xl">Menu</span>
-                     <SheetClose asChild>
-                       <Button variant="ghost" size="icon" className="rounded-full">
-                         <X className="w-6 h-6" />
-                       </Button>
-                     </SheetClose>
+                     
+                     {/* FIX: Removed the manual SheetClose button here. 
+                         The SheetContent component already renders a default Close button. */}
+                     
                   </div>
 
                   <nav className="flex flex-col gap-4">
