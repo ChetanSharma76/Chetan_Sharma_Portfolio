@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,6 +7,7 @@ import { Mail, MapPin, Phone, Send, ArrowRight, MessageSquare } from "lucide-rea
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 
 type ContactFormData = {
   name: string;
@@ -83,7 +83,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden bg-background">
-      {/* Background Decor: Soft Blob Gradients */}
+      {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -91,169 +91,157 @@ export function Contact() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           
           {/* LEFT SIDE: Info & Context */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-10"
-          >
+          <div className="space-y-10">
             {/* Header */}
-            <div>
-              <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
-                <MessageSquare className="w-3 h-3 mr-1 inline-block" />
-                Get in Touch
-              </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-                Let's Work <span className="text-primary">Together.</span>
-              </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
-                I'm currently looking for new opportunities. Whether you have a project in mind or just want to say hi, I'll try my best to get back to you!
-              </p>
-            </div>
+            <ScrollReveal>
+              <div>
+                <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
+                  <MessageSquare className="w-3 h-3 mr-1 inline-block" />
+                  Get in Touch
+                </Badge>
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+                  Let's Work <span className="text-primary">Together.</span>
+                </h2>
+                <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
+                  I'm currently looking for new opportunities. Whether you have a project in mind or just want to say hi, I'll try my best to get back to you!
+                </p>
+              </div>
+            </ScrollReveal>
 
             {/* Interactive Contact Cards */}
-            <div className="grid gap-5">
+            <StaggerContainer className="grid gap-5">
               {contactInfo.map((item, index) => (
-                <motion.a
-                  key={index}
-                  href={item.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="
-                    flex items-center gap-5 p-5 rounded-2xl 
-                    bg-card/40 border border-border/50 backdrop-blur-sm
-                    hover:bg-card/80 hover:border-primary/20 hover:shadow-lg
-                    transition-all duration-300 group
-                  "
-                >
-                  <div className={`
-                    w-12 h-12 rounded-xl flex items-center justify-center 
-                    ${item.bg} ${item.color} 
-                    group-hover:scale-110 transition-transform duration-300
-                  `}>
-                    <item.icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 mb-1">
-                      {item.title}
-                    </h4>
-                    <p className="text-base font-medium text-foreground group-hover:text-primary transition-colors">
-                      {item.value}
-                    </p>
-                  </div>
-                  <ArrowRight className="ml-auto w-5 h-5 text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-
-
-          {/* RIGHT SIDE: The Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="relative"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-blue-500/10 rounded-3xl blur-2xl -z-10" />
-            
-            <Card className="border-border/50 bg-card/60 backdrop-blur-xl shadow-2xl">
-              <CardContent className="p-8 md:p-10">
-                <form className="space-y-6" onSubmit={handleSubmit}>
-                  
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Name</label>
-                      <Input
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="John Doe"
-                        className="
-                          h-12 bg-secondary/30 border-transparent 
-                          focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary/20 
-                          transition-all duration-300 rounded-xl
-                        "
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Email</label>
-                      <Input
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="john@example.com"
-                        className="
-                          h-12 bg-secondary/30 border-transparent 
-                          focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary/20 
-                          transition-all duration-300 rounded-xl
-                        "
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Subject</label>
-                    <Input
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      placeholder="Project Collaboration"
-                      className="
-                        h-12 bg-secondary/30 border-transparent 
-                        focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary/20 
-                        transition-all duration-300 rounded-xl
-                      "
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Message</label>
-                    <Textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell me about your project..."
-                      className="
-                        min-h-[160px] bg-secondary/30 border-transparent 
-                        focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary/20 
-                        resize-none transition-all duration-300 rounded-xl
-                      "
-                      required
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={contactMutation.isPending}
+                <StaggerItem key={index}>
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noreferrer"
                     className="
-                      w-full h-14 cursor-pointer text-lg font-medium rounded-xl 
-                      bg-primary hover:bg-primary/90 text-primary-foreground 
-                      shadow-lg shadow-primary/25 transition-all hover:scale-[1.02] active:scale-[0.98]
+                      flex items-center gap-5 p-5 rounded-2xl 
+                      bg-card/40 border border-border/50 backdrop-blur-sm
+                      hover:bg-card/80 hover:border-primary/20 hover:shadow-lg
+                      transition-all duration-300 group
                     "
                   >
-                    {contactMutation.isPending ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        Send Message <Send className="ml-2 w-5 h-5" />
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
+                    <div className={`
+                      w-12 h-12 rounded-xl flex items-center justify-center 
+                      ${item.bg} ${item.color} 
+                      group-hover:scale-110 transition-transform duration-300
+                    `}>
+                      <item.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 mb-1">
+                        {item.title}
+                      </h4>
+                      <p className="text-base font-medium text-foreground group-hover:text-primary transition-colors">
+                        {item.value}
+                      </p>
+                    </div>
+                    <ArrowRight className="ml-auto w-5 h-5 text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                  </a>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          </div>
 
+          {/* RIGHT SIDE: The Form */}
+          <ScrollReveal delay={0.2}>
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-blue-500/10 rounded-3xl blur-2xl -z-10" />
+              
+              <Card className="border-border/50 bg-card/60 backdrop-blur-xl shadow-2xl">
+                <CardContent className="p-8 md:p-10">
+                  <form className="space-y-6" onSubmit={handleSubmit}>
+                    
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Name</label>
+                        <Input
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="John Doe"
+                          className="
+                            h-12 bg-secondary/30 border-transparent 
+                            focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary/20 
+                            transition-all duration-300 rounded-xl
+                          "
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Email</label>
+                        <Input
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="john@example.com"
+                          className="
+                            h-12 bg-secondary/30 border-transparent 
+                            focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary/20 
+                            transition-all duration-300 rounded-xl
+                          "
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Subject</label>
+                      <Input
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        placeholder="Project Collaboration"
+                        className="
+                          h-12 bg-secondary/30 border-transparent 
+                          focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary/20 
+                          transition-all duration-300 rounded-xl
+                        "
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Message</label>
+                      <Textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Tell me about your project..."
+                        className="
+                          min-h-[160px] bg-secondary/30 border-transparent 
+                          focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary/20 
+                          resize-none transition-all duration-300 rounded-xl
+                        "
+                        required
+                      />
+                    </div>
+
+                    <Button
+                      type="submit"
+                      disabled={contactMutation.isPending}
+                      className="
+                        w-full h-14 cursor-pointer text-lg font-medium rounded-xl 
+                        bg-primary hover:bg-primary/90 text-primary-foreground 
+                        shadow-lg shadow-primary/25 transition-all hover:scale-[1.02] active:scale-[0.98]
+                      "
+                    >
+                      {contactMutation.isPending ? (
+                        "Sending..."
+                      ) : (
+                        <>
+                          Send Message <Send className="ml-2 w-5 h-5" />
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

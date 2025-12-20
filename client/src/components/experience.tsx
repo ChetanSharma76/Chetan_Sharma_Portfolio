@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
 import { Calendar, Building2, CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 
 export function Experience() {
   const experiences = [
@@ -22,71 +22,44 @@ export function Experience() {
 
   return (
     <section id="experience" className="py-24 relative overflow-hidden bg-background">
-      {/* Background Decor: Vertical Lines for Structure */}
-      <div className="absolute inset-0 flex justify-center pointer-events-none">
-        <div className="w-px h-full bg-border/30 hidden md:block absolute left-1/3"></div>
-        <div className="w-px h-full bg-border/30 hidden md:block absolute left-2/3"></div>
-      </div>
-
+      
       <div className="container mx-auto px-6 relative z-10">
         
         {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-20 text-center md:text-left md:pl-8 lg:pl-0"
-        >
-          <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
-            Career Path
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Professional <span className="text-primary">Experience</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-xl">
-             A timeline of my professional contributions and technical leadership roles.
-          </p>
-        </motion.div>
+        <ScrollReveal>
+          <div className="mb-20 text-center md:text-left md:pl-8 lg:pl-0">
+            <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
+              Career Path
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+              Professional <span className="text-primary">Experience</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-xl">
+               A timeline of my professional contributions and technical leadership roles.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Timeline Layout */}
-        <div className="relative max-w-5xl mx-auto">
+        <StaggerContainer className="relative max-w-5xl mx-auto">
           {experiences.map((exp, index) => (
-            <div key={exp.id} className="relative grid md:grid-cols-[220px_1fr] gap-8 md:gap-12 mb-12 last:mb-0">
+            <StaggerItem key={exp.id} className="relative grid md:grid-cols-[220px_1fr] gap-8 md:gap-12 mb-12 last:mb-0">
               
-              {/* Left Column: Date & Metadata (Desktop) */}
-              {/* FIX: Added 'pr-8' to force a gap between text and the line */}
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="hidden md:flex flex-col text-right pt-2 pr-8" 
-              >
+              {/* Left Column: Date & Metadata */}
+              <div className="hidden md:flex flex-col text-right pt-2 pr-8">
                 <span className="text-xl font-bold text-foreground">{exp.period.split('–')[0]}</span>
                 <span className="text-sm text-muted-foreground font-mono mt-1">{exp.period}</span>
                 <span className="text-xs text-muted-foreground/60 mt-2 uppercase tracking-wide">{exp.location}</span>
-              </motion.div>
+              </div>
 
-              {/* Timeline Connector (Mobile & Desktop) */}
-              {/* FIX: Adjusted left position to 'md:left-[220px]' to match the new grid column size */}
+              {/* Timeline Connector */}
               <div className="absolute left-0 md:left-[220px] top-0 bottom-0 w-px bg-gradient-to-b from-primary via-border to-transparent md:-ml-px hidden md:block"></div>
               
               {/* Timeline Dot */}
-              <motion.div 
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                className="absolute left-0 md:left-[220px] top-2 w-3 h-3 rounded-full bg-primary ring-4 ring-background md:-ml-1.5 hidden md:block shadow-[0_0_10px_rgba(6,182,212,0.5)]"
-              />
+              <div className="absolute left-0 md:left-[220px] top-2 w-3 h-3 rounded-full bg-primary ring-4 ring-background md:-ml-1.5 hidden md:block shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
 
               {/* Right Column: Content Card */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.3 }}
-                className="relative"
-              >
+              <div className="relative">
                 <Card className="
                   group overflow-hidden border-border/50 bg-card/40 backdrop-blur-sm
                   hover:bg-card/60 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5
@@ -97,7 +70,6 @@ export function Experience() {
                     {/* Card Header */}
                     <div className="flex flex-col sm:flex-row gap-4 justify-between items-start mb-6">
                       <div className="flex gap-4">
-                        {/* Company Logo Placeholder */}
                         <div className="w-12 h-12 rounded-lg bg-secondary/50 border border-border flex items-center justify-center text-foreground shrink-0">
                           <Building2 className="w-6 h-6" />
                         </div>
@@ -111,7 +83,7 @@ export function Experience() {
                         </div>
                       </div>
                       
-                      {/* Date Chip (Mobile Only) */}
+                      {/* Date Chip (Mobile) */}
                       <div className="md:hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 text-xs font-mono text-secondary-foreground">
                         <Calendar className="w-3 h-3" /> {exp.period}
                       </div>
@@ -141,11 +113,10 @@ export function Experience() {
 
                   </div>
                 </Card>
-              </motion.div>
-
-            </div>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

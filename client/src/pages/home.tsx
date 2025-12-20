@@ -4,14 +4,18 @@ import { Skills } from "@/components/skills";
 import { Experience } from "@/components/experience";
 import { Projects } from "@/components/projects";
 import { Achievements } from "@/components/achievements";
+import { Academics } from "@/components/academics";
+import { Por } from "@/components/por";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { AnimatedBackground } from "@/components/animated-bg";
 import { useQuery } from "@tanstack/react-query";
 import { LoadingScreen } from "@/components/loading-screen";
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion"; // Required for smooth switch
+import { AnimatePresence, motion } from "framer-motion";
+import { SoftSkills } from "@/components/soft-skills"; // <--- IMPORT THIS
 
+// ... (Keep your CodingStats interface) ...
 interface CodingStats {
   leetcode: number;
   codeforces: number;
@@ -19,6 +23,7 @@ interface CodingStats {
 }
 
 export default function Home() {
+  // ... (Keep your existing data fetching and loading logic) ...
   const { data: stats, isLoading: isStatsLoading } = useQuery<CodingStats>({
     queryKey: ["coding-stats"],
     queryFn: async () => {
@@ -34,7 +39,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setMinLoadTimePassed(true);
-    }, 2000); // 2 seconds for the full "System Boot" effect
+    }, 2000); 
     return () => clearTimeout(timer);
   }, []);
 
@@ -42,13 +47,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden selection:bg-primary/20">
-      
-      {/* AnimatePresence mode="wait" is the MAGIC FIX.
-         It waits for the LoadingScreen to finish its exit animation 
-         BEFORE it lets the Main Content start rendering.
-      */}
       <AnimatePresence mode="wait">
-        
         {isLoading ? (
           <LoadingScreen key="loader" />
         ) : (
@@ -56,11 +55,9 @@ export default function Home() {
             key="main-content"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }} // Slow, smooth fade-in
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative z-10"
           >
-            {/* Background needs to be inside motion div or separate, 
-                but putting it here ensures it fades in with content */}
             <div className="fixed inset-0 z-0">
                <AnimatedBackground />
             </div>
@@ -69,18 +66,19 @@ export default function Home() {
             
             <main className="relative z-10">
               <Hero />
-              {/* Stats are passed down, ready to display instantly */}
+              <Academics />
               <Achievements stats={stats} />
               <Skills />
               <Experience />
               <Projects />
+              <Por />
+              <SoftSkills /> 
               <Contact />
             </main>
             
             <Footer />
           </motion.div>
         )}
-
       </AnimatePresence>
     </div>
   );

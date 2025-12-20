@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
 import { Award, HeartHandshake, Zap, Crown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 
 export function Por() {
   const positions = [
@@ -36,40 +36,30 @@ export function Por() {
 
   return (
     <section id="por" className="py-24 relative overflow-hidden bg-background">
-      {/* Background Decor: Subtle Arc */}
+      {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-primary/5 rounded-[100%] blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         
         {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-20 text-center max-w-2xl mx-auto"
-        >
-          <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
-            Leadership
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-            Positions of <span className="text-primary">Responsibility</span>
-          </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
-            Roles where I have taken ownership, led teams, and contributed to the community.
-          </p>
-        </motion.div>
+        <ScrollReveal>
+          <div className="mb-20 text-center max-w-2xl mx-auto">
+            <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
+              Leadership
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+              Positions of <span className="text-primary">Responsibility</span>
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              Roles where I have taken ownership, led teams, and contributed to the community.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <StaggerContainer className="grid md:grid-cols-3 gap-8">
           {positions.map((pos, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="h-full"
-            >
+            <StaggerItem key={index} className="h-full">
               <Card className="
                 relative h-full p-8 
                 bg-card/40 backdrop-blur-sm border-border/50
@@ -111,9 +101,9 @@ export function Por() {
                   text-foreground
                 `} />
               </Card>
-            </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

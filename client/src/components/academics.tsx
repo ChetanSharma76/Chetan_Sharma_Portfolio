@@ -1,17 +1,18 @@
-import { motion } from "framer-motion";
+import React from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Landmark, School, Star } from "lucide-react";
+import { GraduationCap, Landmark, School, Star, type LucideIcon } from "lucide-react";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 
 interface AcademicItem {
   title: string;
   institution: string;
   year: string;
   score: string;
-  scoreLabel: string; // Separated for styling
+  scoreLabel: string;
   details: string;
   subjects: string[];
-  icon: React.ElementType;
+  icon: LucideIcon | React.ComponentType<{ className?: string }>;
 }
 
 export function Academics() {
@@ -50,43 +51,44 @@ export function Academics() {
 
   return (
     <section id="academics" className="py-24 relative overflow-hidden bg-background">
-      {/* Background Decor: Technical Dot Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      {/* --- BACKGROUND DECOR START --- */}
+
+      {/* REMOVED: The grid pattern div has been removed as requested. */}
       
-      {/* Subtle Radial Gradient for depth */}
+      {/* 1. Primary Central Glow (Kept from original design) */}
       <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
+
+      {/* 2. NEW: Secondary Ambient Glow (Adds depth for an academic feel) */}
+      <div className="absolute -right-20 bottom-0 -z-10 h-[400px] w-[400px] rounded-full bg-blue-500/5 blur-[120px]"></div>
+
+      {/* 3. NEW: Subtle Noise Texture (Gives a sophisticated, non-flat paper-like feel) */}
+      <div className="absolute inset-0 -z-10 opacity-[0.02] mix-blend-overlay pointer-events-none"
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      </div>
+      {/* --- BACKGROUND DECOR END --- */}
+
 
       <div className="container mx-auto px-6 relative z-10">
         
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col items-center mb-16 space-y-4 text-center"
-        >
-          <Badge variant="outline" className="uppercase tracking-widest text-[10px] px-3 py-1 border-primary/20 bg-primary/5 text-primary">
-            Education
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-            Academic <span className="text-primary">Milestones</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl text-lg font-light leading-relaxed">
-            A chronological overview of my educational background, highlighting institutions and performance metrics.
-          </p>
-        </motion.div>
+        <ScrollReveal>
+          <div className="flex flex-col items-center mb-16 space-y-4 text-center">
+            <Badge variant="outline" className="uppercase tracking-widest text-[10px] px-3 py-1 border-primary/20 bg-primary/5 text-primary">
+              Education
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+              Academic <span className="text-primary">Milestones</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl text-lg font-light leading-relaxed">
+              A chronological overview of my educational background, highlighting institutions and performance metrics.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        {/* Cards Layout */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Cards Layout - EXACTLY AS IT WAS */}
+        <StaggerContainer className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {academics.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
-              className="h-full"
-            >
+            <StaggerItem key={index} className="h-full">
               <Card className="
                 group relative h-full flex flex-col justify-between overflow-hidden
                 border border-border/40 bg-card/50 backdrop-blur-sm
@@ -148,9 +150,9 @@ export function Academics() {
                   </div>
                 </div>
               </Card>
-            </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

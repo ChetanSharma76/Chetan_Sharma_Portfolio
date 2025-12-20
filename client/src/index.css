@@ -102,23 +102,48 @@
 }
 
 @layer base {
+  html {
+    /* 1. This enables the smooth gliding effect */
+    scroll-behavior: smooth;
+    /* Makes text rendering sharper during movement */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 2. This prevents the fixed navbar from covering section titles */
+  section {
+    scroll-margin-top: 100px;
+  }
+  
   * {
     @apply border-border;
   }
   body {
     @apply font-sans antialiased bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground;
     background-attachment: fixed;
-  }
-  
-  /* Pattern for Light Mode */
-  body {
-     background-image: 
+    -webkit-font-smoothing: subpixel-antialiased;
+    backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow-x: hidden; /* Strict overflow prevention */
+    background-image: 
       linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95)),
       url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230ea5e9' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 
+  .card, section, img {
+    /* Tells browser these elements will likely change, so prep the GPU */
+    will-change: transform, opacity; 
+    /* Ensures 3D acceleration is on */
+    transform: translateZ(0); 
+  }
+
   /* Pattern for Dark Mode */
   .dark body {
+    background-attachment: fixed;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+    backface-visibility: hidden;
+    overflow-x: hidden; /* Strict overflow prevention */
     background-image: 
       linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
       url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2306b6d4' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
@@ -151,3 +176,5 @@
     perspective: 1000px;
   }
 }
+
+
