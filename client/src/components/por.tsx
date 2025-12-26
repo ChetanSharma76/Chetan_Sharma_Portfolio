@@ -1,7 +1,6 @@
 import { Award, HeartHandshake, Zap, Crown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 
 export function Por() {
   const positions = [
@@ -41,25 +40,23 @@ export function Por() {
 
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* Header */}
-        <ScrollReveal>
-          <div className="mb-20 text-center max-w-2xl mx-auto">
-            <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
-              Leadership
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-              Positions of <span className="text-primary">Responsibility</span>
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Roles where I have taken ownership, led teams, and contributed to the community.
-            </p>
-          </div>
-        </ScrollReveal>
+        {/* Header - Static */}
+        <div className="mb-20 text-center max-w-2xl mx-auto">
+          <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
+            Leadership
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            Positions of <span className="text-primary">Responsibility</span>
+          </h2>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Roles where I have taken ownership, led teams, and contributed to the community.
+          </p>
+        </div>
 
-        {/* Cards Grid */}
-        <StaggerContainer className="grid md:grid-cols-3 gap-8">
+        {/* Cards Grid - Static */}
+        <div className="grid md:grid-cols-3 gap-8">
           {positions.map((pos, index) => (
-            <StaggerItem key={index} className="h-full">
+            <div key={index} className="h-full">
               <Card className="
                 relative h-full p-8 
                 bg-card/40 backdrop-blur-sm border-border/50
@@ -101,9 +98,9 @@ export function Por() {
                   text-foreground
                 `} />
               </Card>
-            </StaggerItem>
+            </div>
           ))}
-        </StaggerContainer>
+        </div>
       </div>
     </section>
   );

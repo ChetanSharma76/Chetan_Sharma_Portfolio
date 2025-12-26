@@ -1,7 +1,6 @@
 import { Calendar, Building2, CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 
 export function Experience() {
   const experiences = [
@@ -22,28 +21,25 @@ export function Experience() {
 
   return (
     <section id="experience" className="py-24 relative overflow-hidden bg-background">
-      
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* Header */}
-        <ScrollReveal>
-          <div className="mb-20 text-center md:text-left md:pl-8 lg:pl-0">
-            <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
-              Career Path
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              Professional <span className="text-primary">Experience</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-xl">
-               A timeline of my professional contributions and technical leadership roles.
-            </p>
-          </div>
-        </ScrollReveal>
+        {/* Header - Static */}
+        <div className="mb-20 text-center md:text-left md:pl-8 lg:pl-0">
+          <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
+            Career Path
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            Professional <span className="text-primary">Experience</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-xl">
+             A timeline of my professional contributions and technical leadership roles.
+          </p>
+        </div>
 
-        {/* Timeline Layout */}
-        <StaggerContainer className="relative max-w-5xl mx-auto">
-          {experiences.map((exp, index) => (
-            <StaggerItem key={exp.id} className="relative grid md:grid-cols-[220px_1fr] gap-8 md:gap-12 mb-12 last:mb-0">
+        {/* Timeline Layout - Static */}
+        <div className="relative max-w-5xl mx-auto">
+          {experiences.map((exp) => (
+            <div key={exp.id} className="relative grid md:grid-cols-[220px_1fr] gap-8 md:gap-12 mb-12 last:mb-0">
               
               {/* Left Column: Date & Metadata */}
               <div className="hidden md:flex flex-col text-right pt-2 pr-8">
@@ -54,8 +50,6 @@ export function Experience() {
 
               {/* Timeline Connector */}
               <div className="absolute left-0 md:left-[220px] top-0 bottom-0 w-px bg-gradient-to-b from-primary via-border to-transparent md:-ml-px hidden md:block"></div>
-              
-              {/* Timeline Dot */}
               <div className="absolute left-0 md:left-[220px] top-2 w-3 h-3 rounded-full bg-primary ring-4 ring-background md:-ml-1.5 hidden md:block shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
 
               {/* Right Column: Content Card */}
@@ -66,8 +60,6 @@ export function Experience() {
                   transition-all duration-300
                 ">
                   <div className="p-6 md:p-8">
-                    
-                    {/* Card Header */}
                     <div className="flex flex-col sm:flex-row gap-4 justify-between items-start mb-6">
                       <div className="flex gap-4">
                         <div className="w-12 h-12 rounded-lg bg-secondary/50 border border-border flex items-center justify-center text-foreground shrink-0">
@@ -83,13 +75,11 @@ export function Experience() {
                         </div>
                       </div>
                       
-                      {/* Date Chip (Mobile) */}
                       <div className="md:hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 text-xs font-mono text-secondary-foreground">
                         <Calendar className="w-3 h-3" /> {exp.period}
                       </div>
                     </div>
 
-                    {/* Description Bullets */}
                     <ul className="space-y-3 mb-8">
                       {exp.description.map((item, i) => (
                         <li key={i} className="flex items-start gap-3 text-muted-foreground/90 text-[15px] leading-relaxed">
@@ -99,24 +89,19 @@ export function Experience() {
                       ))}
                     </ul>
 
-                    {/* Footer: Tech Tags */}
                     <div className="pt-6 border-t border-border/30 flex flex-wrap gap-2">
                       {exp.tech.map((tag, i) => (
-                        <span 
-                          key={i} 
-                          className="px-2.5 py-1 rounded-md text-xs font-medium bg-primary/5 text-primary border border-primary/10"
-                        >
+                        <span key={i} className="px-2.5 py-1 rounded-md text-xs font-medium bg-primary/5 text-primary border border-primary/10">
                           {tag}
                         </span>
                       ))}
                     </div>
-
                   </div>
                 </Card>
               </div>
-            </StaggerItem>
+            </div>
           ))}
-        </StaggerContainer>
+        </div>
       </div>
     </section>
   );

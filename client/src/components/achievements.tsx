@@ -1,8 +1,7 @@
-import { SiLeetcode, SiCodechef, SiCodeforces } from "react-icons/si";
-import { ExternalLink, Zap, TrendingUp, Trophy } from "lucide-react";
+import { SiLeetcode, SiCodechef } from "react-icons/si";
+import { ExternalLink, Zap, TrendingUp, Trophy, Award, Star } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 
 interface CodingStats {
   leetcode: number;
@@ -12,193 +11,221 @@ interface CodingStats {
 
 export function Achievements({ stats }: { stats?: CodingStats }) {
   
-  // Custom Knight Badge SVG
-  const LeetCodeKnightBadge = () => (
-    <svg width="16" height="16" viewBox="0 0 200 200" fill="none" className="inline-block mr-1.5">
-      <path d="M100 10L20 40V95C20 150 55 180 100 190C145 180 180 150 180 95V40L100 10Z" fill="#2D2D2D" stroke="#F7B500" strokeWidth="12" strokeLinejoin="round"/>
-      <path d="M100 55L85 95L100 135L115 95L100 55Z" fill="#F7B500"/>
+  // --- ICONS & BADGES ---
+
+  const CodeforcesIcon = () => (
+    <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1.5" y="9" width="6" height="12" rx="1.5" fill="#FFC400"/>
+      <rect x="9" y="1.5" width="6" height="19.5" rx="1.5" fill="#318CE7"/>
+      <rect x="16.5" y="6" width="6" height="15" rx="1.5" fill="#CC0000"/>
     </svg>
   );
 
+  const KnightBadge = () => (
+    <div className="relative group/badge" title="Rank: Knight">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-sm">
+        <path d="M12 2L3 7V12C3 17.52 7.29 21.4 12 22C16.71 21.4 21 17.52 21 12V7L12 2Z" fill="url(#knight_gradient)" stroke="#B388FF" strokeWidth="1.5"/>
+        <path d="M12 6L9 11H15L12 16L12 6Z" fill="#FFF" fillOpacity="0.9"/>
+        <defs>
+          <linearGradient id="knight_gradient" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#7E57C2" /> 
+            <stop offset="1" stopColor="#512DA8" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+
+  const ThreeStars = () => (
+    <div className="flex gap-0.5 group/stars" title="Rank: 3 Star">
+      {[1, 2, 3].map((i) => (
+        <Star 
+          key={i} 
+          className="w-4 h-4 fill-muted-foreground/30 text-muted-foreground/30 transition-all duration-500 group-hover:fill-yellow-400 group-hover:text-yellow-400" 
+        />
+      ))}
+    </div>
+  );
+
+  // --- DATA ---
   const platforms = [
     {
       name: "LeetCode",
-      icon: SiLeetcode,
+      Icon: SiLeetcode,
+      customIcon: false,
+      RankComponent: <KnightBadge />, 
       rating: "1,875",
-      maxRating: "Max 1,890",
-      rankLabel: "Knight",
-      rankColor: "text-[#FFA116] bg-[#FFA116]/10 border-[#FFA116]/20",
-      rankIcon: <LeetCodeKnightBadge />,
-      solved: `${stats?.leetcode || "650+"}`, 
-      desc: "Top 4% Global • Contest Rank 975",
-      color: "#FFA116", // LeetCode Orange
-      link: "https://leetcode.com/u/ChetanSharma1/"
+      maxRating: "1,890",
+      solved: `${stats?.leetcode || "650+"}`,
+      color: "#FFA116",
+      textColor: "text-[#FFA116]",
+      bgGlow: "bg-[#FFA116]/10",
+      borderGlow: "group-hover:border-[#FFA116]/40", // Lower opacity border
+      link: "https://leetcode.com/u/ChetanSharma1/",
+      details: "Top 4% Global • Weekly Contest 975"
     },
     {
       name: "Codeforces",
-      icon: SiCodeforces,
+      Icon: CodeforcesIcon,
+      customIcon: true,
+      RankComponent: (
+        <Badge variant="secondary" className="bg-[#03A89E]/10 text-[#03A89E] border-[#03A89E]/20 font-mono text-[11px] uppercase tracking-wider px-2.5 py-1">
+          Pupil
+        </Badge>
+      ),
       rating: "1,395",
-      maxRating: "Max 1,410",
-      rankLabel: "Pupil",
-      rankColor: "text-[#03A89E] bg-[#03A89E]/10 border-[#03A89E]/20", // Pupil Green/Cyan
-      rankIcon: <div className="w-2 h-2 rounded-full bg-[#03A89E] mr-2 shadow-[0_0_8px_#03A89E]" />,
+      maxRating: "1,410",
       solved: `${stats?.codeforces || "800+"}`,
-      desc: "160+ Day Active Streak",
-      color: "#1F8ACB", // Codeforces Blue
-      link: "https://codeforces.com/profile/chetansharma7777"
+      color: "#1F8ACB",
+      textColor: "text-[#1F8ACB]",
+      bgGlow: "bg-[#1F8ACB]/10",
+      borderGlow: "group-hover:border-[#1F8ACB]/40",
+      link: "https://codeforces.com/profile/chetansharma7777",
+      details: "160+ Day Active Streak"
     },
     {
       name: "CodeChef",
-      icon: SiCodechef,
+      Icon: SiCodechef,
+      customIcon: false,
+      RankComponent: <ThreeStars />,
       rating: "1,736",
-      maxRating: "Max 1,750",
-      rankLabel: "3 Star",
-      rankColor: "text-[#5B4638] bg-[#5B4638]/10 border-[#5B4638]/20", // CodeChef Brown
-      rankIcon: <StarIcon className="w-3 h-3 text-[#5B4638] mr-1" />,
+      maxRating: "1,750",
       solved: `${stats?.codechef || "100+"}`,
-      desc: "Global Rank 400 • Starters 152",
-      color: "#E68A00", // CodeChef Orange/Gold Brand Color
-      link: "https://www.codechef.com/users/chetansharma07"
+      color: "#5B4638",
+      textColor: "text-[#D9BBA9]", 
+      bgGlow: "bg-[#5B4638]/10",
+      borderGlow: "group-hover:border-[#5B4638]/40",
+      link: "https://www.codechef.com/users/chetansharma07",
+      details: "Global Rank 400 • Starters 152"
     }
   ];
 
   return (
     <section id="achievements" className="py-24 relative overflow-hidden bg-background">
       
-      {/* --- BACKGROUND DECOR --- */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
-      </div>
-
+      {/* Background Decor - Minimal */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+      
       <div className="container mx-auto px-6 relative z-10">
         
-        <ScrollReveal>
-          <div className="mb-16 md:mb-20 text-center max-w-2xl mx-auto">
-            <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
-              <Trophy className="w-3 h-3 mr-1 inline-block" />
-              Competitive Programming
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-              Algorithmic <span className="text-primary">Mastery</span>
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-               Consistent performance across global coding platforms, demonstrating strong data structure knowledge and problem-solving agility.
-            </p>
-          </div>
-        </ScrollReveal>
+        {/* Header */}
+        <div className="mb-20 text-center max-w-2xl mx-auto">
+          <Badge variant="outline" className="mb-4 px-3 py-1 border-primary/20 text-primary bg-primary/5 uppercase tracking-widest text-[10px]">
+            <Trophy className="w-3 h-3 mr-1 inline-block" />
+            Competitive Programming
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            Algorithmic <span className="text-primary">Mastery</span>
+          </h2>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+             Consistent performance across global coding platforms, demonstrating strong data structure knowledge and problem-solving agility.
+          </p>
+        </div>
 
-        <StaggerContainer className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        {/* --- CARDS GRID --- */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {platforms.map((platform, index) => (
-            <StaggerItem key={index} className="h-full">
-              <a href={platform.link} target="_blank" rel="noreferrer" className="block h-full group perspective-1000">
-                <Card className="
-                  relative h-full flex flex-col
-                  bg-card/30 backdrop-blur-xl
-                  border border-border/60
-                  rounded-2xl overflow-hidden
-                  transition-all duration-500 ease-out
-                  group-hover:border-opacity-100
-                  group-hover:shadow-2xl
-                  /* BRAND COLORED HOVER BORDER */
-                  hover:!border-[var(--brand-color)]
-                "
-                style={{ '--brand-color': platform.color } as React.CSSProperties}
-                >
+            <a 
+              key={index}
+              href={platform.link} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="block group relative h-full"
+            >
+              <Card className={`
+                relative h-full flex flex-col justify-between
+                bg-card/50 backdrop-blur-xl border border-border/50
+                overflow-hidden transition-all duration-500
+                
+                /* LIGHT MODE: Minimal Shadow & Movement */
+                hover:shadow-lg hover:shadow-black/5 hover:-translate-y-1
+                
+                /* DARK MODE: Deeper Shadow */
+                dark:hover:shadow-2xl dark:hover:shadow-black/20
+                
+                ${platform.borderGlow}
+              `}>
+                
+                {/* Brand Colored Glow on Hover - REDUCED OPACITY for Light Mode */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-5 dark:group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: `radial-gradient(circle at top right, ${platform.color}, transparent 70%)` }}
+                />
+
+                <div className="p-7">
                   
-                  {/* Subtle Gradient Overlay on Hover */}
-                  <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: `linear-gradient(to bottom right, ${platform.color}, transparent)` }}
-                  />
-
-                  {/* Header: Icon & Name */}
-                  <div className="p-6 pb-4 flex justify-between items-center border-b border-border/30">
-                     <div className="flex items-center gap-3">
-                        <div 
-                          className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                          style={{ backgroundColor: `${platform.color}15` }} // 15% opacity background
-                        >
-                          <platform.icon 
-                            className="w-6 h-6 transition-colors" 
-                            style={{ color: platform.color }}
-                          />
-                        </div>
-                        <h3 className="font-bold text-lg tracking-tight group-hover:text-primary transition-colors">
-                          {platform.name}
-                        </h3>
-                     </div>
-                     <ExternalLink className="w-4 h-4 text-muted-foreground opacity-50 group-hover:opacity-100 group-hover:text-[var(--brand-color)] transition-all duration-300" />
-                  </div>
-
-                  {/* Body: Stats Grid (HUD Style) */}
-                  <div className="p-6 grid grid-cols-2 gap-px bg-border/20">
+                  {/* Card Header */}
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="flex items-center gap-4">
+                      {/* Icon Container - NO SCALING/TRANSITION */}
+                      <div className={`
+                        p-2.5 rounded-xl bg-background shadow-sm border border-border/50 
+                      `}>
+                        {platform.customIcon ? (
+                          <platform.Icon /> 
+                        ) : (
+                          <platform.Icon className="w-8 h-8" style={{ color: platform.color }} />
+                        )}
+                      </div>
+                      
+                      <div>
+                        <h3 className="font-bold text-xl tracking-tight text-foreground">{platform.name}</h3>
+                        <p className="text-xs font-medium text-muted-foreground flex items-center gap-1 mt-0.5">
+                          Profile <ExternalLink className="w-3 h-3" />
+                        </p>
+                      </div>
+                    </div>
                     
-                    {/* Rating Stat */}
-                    <div className="bg-card/30 p-4 -ml-6 -my-4 flex flex-col items-center justify-center border-r border-border/20 group-hover:bg-[var(--brand-color)]/5 transition-colors duration-500">
-                       <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 flex items-center gap-1">
-                         <TrendingUp className="w-3 h-3" /> Max Rating
-                       </div>
-                       <div className="text-2xl font-bold font-mono tracking-tight text-foreground">
-                         {platform.rating}
-                       </div>
-                       <div className="text-[9px] text-muted-foreground/70 font-mono mt-0.5">
-                         {platform.maxRating}
-                       </div>
-                    </div>
-
-                    {/* Solved Stat */}
-                    <div className="bg-card/30 p-4 -mr-6 -my-4 flex flex-col items-center justify-center group-hover:bg-[var(--brand-color)]/5 transition-colors duration-500">
-                       <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 flex items-center gap-1">
-                         <Zap className="w-3 h-3" /> Solved
-                       </div>
-                       <div className="text-2xl font-bold font-mono tracking-tight text-foreground">
-                         {platform.solved}
-                       </div>
-                       <div className="text-[9px] text-muted-foreground/70 font-mono mt-0.5">
-                         Problems
-                       </div>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60 font-semibold">Rank</span>
+                      {platform.RankComponent}
                     </div>
                   </div>
 
-                  {/* Footer: Rank & Description */}
-                  <div className="p-6 pt-4 mt-auto flex flex-col gap-4">
-                     <div className="flex justify-between items-center">
-                        <span className="text-xs font-medium text-muted-foreground/80">Current Rank</span>
-                        <Badge variant="secondary" className={`
-                           ${platform.rankColor} border
-                           font-mono text-[10px] uppercase tracking-wider
-                           flex items-center gap-1.5 px-2.5 py-1
-                           transition-transform duration-300 group-hover:scale-105
-                        `}>
-                           {platform.rankIcon}
-                           {platform.rankLabel}
-                        </Badge>
-                     </div>
-                     
-                     <div className="h-px w-full bg-border/40" />
-                     
-                     <p className="text-xs text-muted-foreground text-center font-medium opacity-80">
-                        {platform.desc}
-                     </p>
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-2 gap-4 mb-8">
+                    {/* Rating */}
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">
+                        <TrendingUp className="w-3 h-3" /> Max Rating
+                      </div>
+                      <div className="text-3xl font-bold font-mono text-foreground tracking-tighter">
+                        {platform.rating}
+                      </div>
+                      <div className="text-[10px] text-muted-foreground/60 font-mono">
+                        {platform.maxRating} Peak
+                      </div>
+                    </div>
+
+                    {/* Solved */}
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">
+                        <Zap className="w-3 h-3" /> Solved
+                      </div>
+                      <div className="text-3xl font-bold font-mono text-foreground tracking-tighter">
+                        {platform.solved}
+                      </div>
+                      <div className="text-[10px] text-muted-foreground/60 font-mono">
+                        Problems
+                      </div>
+                    </div>
                   </div>
 
-                </Card>
-              </a>
-            </StaggerItem>
+                  {/* Footer Info */}
+                  <div className="pt-5 border-t border-border/40">
+                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground/80">
+                      <Award className="w-4 h-4 text-primary/70" />
+                      {platform.details}
+                    </div>
+                  </div>
+
+                </div>
+              </Card>
+            </a>
           ))}
-        </StaggerContainer>
+        </div>
 
       </div>
     </section>
-  );
-}
-
-// Helper Icon
-function StarIcon({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-    </svg>
   );
 }

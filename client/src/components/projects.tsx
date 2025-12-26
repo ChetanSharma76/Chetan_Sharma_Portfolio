@@ -90,7 +90,7 @@ export function Projects() {
                   </div>
 
                   {/* Image Container */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+                  <div className="relative aspect-16/10 overflow-hidden bg-muted">
                     <div className="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <img 
                       src={project.image} 
@@ -102,7 +102,7 @@ export function Projects() {
                   </div>
 
                   {/* Content */}
-                  <CardContent className="p-6 flex-grow flex flex-col">
+                  <CardContent className="p-6 grow flex flex-col">
                     <div className="flex justify-between items-start mb-3">
                         <span className="text-xs font-medium text-primary mb-2 uppercase tracking-wider">
                         {project.category}
