@@ -2,7 +2,8 @@
 
 A modern, fully responsive, performance-optimized **developer portfolio website** showcasing my projects, skills, achievements, and experience in software development.
 
-**Live Website:** [https://your-vercel-url.vercel.app ](https://chetan-sharma-portfolio-psi.vercel.app/) 
+**Live Website:** [Live Project Link](https://chetan-sharma-portfolio-psi.vercel.app/)
+
 **Contact:** chetansharma752005@gmail.com  
 
 ---
