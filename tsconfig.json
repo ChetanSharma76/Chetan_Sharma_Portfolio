@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    
+    /* FIX: Use 'Bundler' mode. This fixes the frontend 'Cannot find module' errors */
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["client/src/*"],
+      "@shared/*": ["shared/*"],
+      "@assets/*": ["attached_assets/*"]
+    },
+    /* Allow importing TS files directly (helps with some Vite edge cases) */
+    "allowImportingTsExtensions": true
+  },
+  "include": ["client/**/*", "server/**/*", "shared/**/*", "api/**/*"]
+}
