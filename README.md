@@ -1,13 +1,14 @@
-# 🚀 Chetan Sharma — Developer Portfolio
+# Chetan Sharma — Developer Portfolio
 
 A modern, fully responsive, performance-optimized **developer portfolio website** showcasing my projects, skills, achievements, and experience in software development.
 
-🔗 **Live Website:** https://your-vercel-url.vercel.app  
-📧 **Contact:** chetansharma752005@gmail.com  
+**Live Website:** [Live Project Link](https://chetan-sharma-portfolio-psi.vercel.app/)
+
+**Contact:** chetansharma752005@gmail.com  
 
 ---
 
-## 🧠 About Me
+## About Me
 
 I am a passionate **Software Developer and Problem Solver** with strong expertise in:
 
@@ -21,28 +22,28 @@ This portfolio highlights my **technical skills, projects, academic achievements
 
 ---
 
-## ✨ Features
+## Features
 
-✅ Fully Responsive UI (Mobile, Tablet & Desktop)  
-✅ Modern UI with Animations (Framer Motion)  
-✅ Dark / Light Mode Toggle  
-✅ Dynamic Project Showcase  
-✅ Contact Form with Email Integration  
-✅ Serverless Backend with Database  
-✅ Optimized for Performance (Vite + Code Splitting)  
-✅ SEO Friendly  
-✅ Hosted on Vercel  
+1. Fully Responsive UI (Mobile, Tablet & Desktop)  
+2. Modern UI with Animations (Framer Motion)  
+3. Dark / Light Mode Toggle  
+4. Dynamic Project Showcase  
+5. Contact Form with Email Integration  
+6. Serverless Backend with Database  
+7. Optimized for Performance (Vite + Code Splitting)  
+8. SEO Friendly  
+9. Hosted on Vercel  
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - React.js (Vite)
 - TypeScript
 - Tailwind CSS
 - Framer Motion
-- Three.js (3D Hero)
+- Three.js (3D)
 
 ### Backend
 - Node.js
@@ -57,6 +58,4 @@ This portfolio highlights my **technical skills, projects, academic achievements
 - VS Code
 
 ---
-
-## 📁 Project Structure
 
