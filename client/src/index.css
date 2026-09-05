@@ -38,129 +38,156 @@
 }
 
 :root {
-  /* Light Mode Theme */
-  --background: 210 40% 98%;
-  --foreground: 222 47% 11%;
+  /* ── LIGHT MODE: Warm Ivory + Deep Slate ── */
+  --background: 40 30% 97%;          /* warm ivory white */
+  --foreground: 224 40% 10%;         /* deep navy-slate */
 
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
+  --card-foreground: 224 40% 10%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
+  --popover-foreground: 224 40% 10%;
 
-  --primary: 199 89% 48%; /* Sky Blue */
-  --primary-foreground: 210 40% 98%;
+  /* Electric Violet as primary */
+  --primary: 258 90% 62%;            /* #7C3AED-ish violet */
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 220 20% 94%;
+  --secondary-foreground: 224 40% 20%;
 
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+  --muted: 220 20% 94%;
+  --muted-foreground: 220 15% 50%;
 
-  --accent: 213 94% 68%;
-  --accent-foreground: 222 47% 11%;
+  --accent: 38 95% 55%;              /* warm gold accent */
+  --accent-foreground: 224 40% 10%;
 
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
 
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 199 89% 48%;
+  --border: 220 20% 88%;
+  --input: 220 20% 88%;
+  --ring: 258 90% 62%;
 
-  --radius: 1rem;
+  --radius: 0.875rem;
 }
 
 .dark {
-  /* Deep Ocean & Electric Teal Theme */
-  --background: 222 47% 11%; 
-  --foreground: 210 40% 98%;
+  /* ── DARK MODE: Deep Navy + Electric Violet + Gold ── */
+  --background: 224 40% 6%;          /* near-black navy */
+  --foreground: 220 20% 94%;
 
-  --card: 222 47% 13%;
-  --card-foreground: 210 40% 98%;
+  --card: 224 35% 9%;
+  --card-foreground: 220 20% 94%;
 
-  --popover: 222 47% 13%;
-  --popover-foreground: 210 40% 98%;
+  --popover: 224 35% 9%;
+  --popover-foreground: 220 20% 94%;
 
-  --primary: 189 94% 43%;
-  --primary-foreground: 222 47% 11%;
+  --primary: 258 85% 68%;            /* bright violet */
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 217 33% 17%;
-  --secondary-foreground: 210 40% 98%;
+  --secondary: 224 30% 14%;
+  --secondary-foreground: 220 20% 80%;
 
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 70%;
+  --muted: 224 30% 14%;
+  --muted-foreground: 220 15% 55%;
 
-  --accent: 213 94% 68%;
-  --accent-foreground: 222 47% 11%;
+  --accent: 38 95% 58%;              /* gold */
+  --accent-foreground: 224 40% 6%;
 
-  --destructive: 0 62% 30%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive: 0 62% 40%;
+  --destructive-foreground: 0 0% 100%;
 
-  --border: 217 33% 20%;
-  --input: 217 33% 20%;
-  --ring: 189 94% 43%;
+  --border: 224 25% 16%;
+  --input: 224 25% 16%;
+  --ring: 258 85% 68%;
 }
 
 @layer base {
   html {
-    /* 1. This enables the smooth gliding effect */
     scroll-behavior: smooth;
-    /* Makes text rendering sharper during movement */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* 2. This prevents the fixed navbar from covering section titles */
   section {
     scroll-margin-top: 100px;
   }
-  
+
   * {
     @apply border-border;
   }
+
   body {
-    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground;
+    @apply font-sans antialiased bg-background text-foreground;
+    @apply selection:bg-primary/20 selection:text-primary;
+    overflow-x: hidden;
     background-attachment: fixed;
     -webkit-font-smoothing: subpixel-antialiased;
-    backface-visibility: hidden;
-    backface-visibility: hidden;
-    overflow-x: hidden; /* Strict overflow prevention */
-    background-image: 
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95)),
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230ea5e9' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    /* Subtle premium noise texture */
+    background-image:
+      linear-gradient(to bottom, hsl(40 30% 97% / 0.97), hsl(40 30% 97% / 0.99)),
+      url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237C3AED' fill-opacity='0.03'%3E%3Cpath d='M40 42v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V8h-2v4h-4v2h4v4h2v-4h4v-2h-4zM8 42v-4H6v4H2v2h4v4h2v-4h4v-2H8zM8 12V8H6v4H2v2h4v4h2v-4h4v-2H8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 
-  .card, section, img {
-    /* Tells browser these elements will likely change, so prep the GPU */
-    will-change: transform, opacity; 
-    /* Ensures 3D acceleration is on */
-    transform: translateZ(0); 
-  }
-
-  /* Pattern for Dark Mode */
   .dark body {
     background-attachment: fixed;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: subpixel-antialiased;
-    backface-visibility: hidden;
-    overflow-x: hidden; /* Strict overflow prevention */
-    background-image: 
-      linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2306b6d4' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    overflow-x: hidden;
+    background-image:
+      linear-gradient(to bottom, hsl(224 40% 6% / 0.97), hsl(224 40% 6% / 0.99)),
+      url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237C3AED' fill-opacity='0.04'%3E%3Cpath d='M40 42v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V8h-2v4h-4v2h4v4h2v-4h4v-2h-4zM8 42v-4H6v4H2v2h4v4h2v-4h4v-2H8zM8 12V8H6v4H2v2h4v4h2v-4h4v-2H8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight;
   }
+
+  .card, section, img {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
 }
 
 @layer utilities {
+  /* Premium glass morphism */
   .glass-panel {
-    @apply bg-white/60 dark:bg-white/[0.03] backdrop-blur-xl border border-black/5 dark:border-white/[0.08] shadow-2xl dark:shadow-black/50;
+    @apply bg-white/70 dark:bg-white/[0.04]
+           backdrop-blur-2xl
+           border border-black/[0.06] dark:border-white/[0.07]
+           shadow-xl shadow-black/5 dark:shadow-black/40;
   }
-  
+
+  /* Violet-to-gold gradient text */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400;
+    @apply bg-clip-text text-transparent
+           bg-gradient-to-r
+           from-violet-600 via-purple-500 to-amber-500
+           dark:from-violet-400 dark:via-purple-400 dark:to-amber-400;
+  }
+
+  /* Section label badge */
+  .section-badge {
+    @apply inline-flex items-center gap-1.5
+           px-3 py-1 rounded-full
+           text-[10px] font-bold uppercase tracking-[0.15em]
+           border border-primary/20 bg-primary/5 text-primary;
+  }
+
+  /* Premium card base */
+  .premium-card {
+    @apply relative overflow-hidden rounded-2xl
+           bg-white/80 dark:bg-white/[0.03]
+           border border-black/[0.06] dark:border-white/[0.07]
+           backdrop-blur-xl
+           shadow-sm shadow-black/5 dark:shadow-black/30
+           transition-all duration-300 ease-out
+           hover:shadow-lg hover:shadow-primary/10
+           hover:border-primary/20 dark:hover:border-primary/25
+           hover:-translate-y-0.5;
+  }
+
+  /* Glow orb utility */
+  .glow-orb {
+    @apply absolute rounded-full blur-[120px] pointer-events-none opacity-40 dark:opacity-25;
   }
 
   .cursor-blink {
@@ -175,6 +202,11 @@
   .perspective-1000 {
     perspective: 1000px;
   }
+
+  /* Shimmer line for section tops */
+  .shimmer-line {
+    @apply absolute top-0 left-0 w-full h-px
+           bg-gradient-to-r from-transparent via-primary/40 to-transparent
+           opacity-0 group-hover:opacity-100 transition-opacity duration-500;
+  }
 }
-
-

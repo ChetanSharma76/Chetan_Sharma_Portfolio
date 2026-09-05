@@ -9,13 +9,13 @@ import { Por } from "@/components/por";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { AnimatedBackground } from "@/components/animated-bg";
+import { Certificates } from "@/components/certificates";
 import { useQuery } from "@tanstack/react-query";
 import { LoadingScreen } from "@/components/loading-screen";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { SoftSkills } from "@/components/soft-skills"; // <--- IMPORT THIS
+import { SoftSkills } from "@/components/soft-skills";
 
-// ... (Keep your CodingStats interface) ...
 interface CodingStats {
   leetcode: number;
   codeforces: number;
@@ -23,7 +23,6 @@ interface CodingStats {
 }
 
 export default function Home() {
-  // ... (Keep your existing data fetching and loading logic) ...
   const { data: stats, isLoading: isStatsLoading } = useQuery<CodingStats>({
     queryKey: ["coding-stats"],
     queryFn: async () => {
@@ -31,15 +30,12 @@ export default function Home() {
       if (!response.ok) throw new Error("Failed to fetch stats");
       return response.json();
     },
-    staleTime: 1000 * 60 * 5, 
+    staleTime: 1000 * 60 * 5,
   });
 
   const [minLoadTimePassed, setMinLoadTimePassed] = useState(false);
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMinLoadTimePassed(true);
-    }, 2000); 
+    const timer = setTimeout(() => setMinLoadTimePassed(true), 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -59,11 +55,11 @@ export default function Home() {
             className="relative z-10"
           >
             <div className="fixed inset-0 z-0">
-               <AnimatedBackground />
+              <AnimatedBackground />
             </div>
 
             <Nav />
-            
+
             <main className="relative z-10">
               <Hero />
               <Academics />
@@ -71,11 +67,12 @@ export default function Home() {
               <Skills />
               <Experience />
               <Projects />
+              <Certificates />
               <Por />
-              <SoftSkills /> 
+              <SoftSkills />
               <Contact />
             </main>
-            
+
             <Footer />
           </motion.div>
         )}
